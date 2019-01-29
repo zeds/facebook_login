@@ -3,7 +3,13 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
-         
+
+  validates :name, presence: true, length: { minimum: 4 }
+
+  def self.check_user_for_oauth(auth)
+    user = User.where(uid: auth.uid, provider: auth.provider).first
+  end
+
   def self.find_for_oauth(auth)
    user = User.where(uid: auth.uid, provider: auth.provider).first
 
@@ -15,10 +21,14 @@ class User < ApplicationRecord
        name:  auth.info.name,
        password: Devise.friendly_token[0, 20],
        image:  auth.info.image
-     )
+     ) # saveまでやってくれる
+
+     flash[:success] = "ユーザー登録しました"
+     redirect_to new_user_session_path
    end
 
-   user
+   @user
+   
   end
-  
+
 end
