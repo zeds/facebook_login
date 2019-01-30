@@ -6,15 +6,15 @@ class NamesController < ApplicationController
   def create
 
     # validation 4文字以上。
-    $username = params[:username]
+    $name = params[:name]
 
-    # debugger
+    debugger
 
     user = User.new(
       uid:      $uid,
       provider: $provider,
       email:    $email,
-      name:  $username,
+      name:  $name,
       password: "hogehoge"
       # password: Devise.friendly_token[0, 20],
       # image:  auth.info.image
@@ -27,7 +27,7 @@ class NamesController < ApplicationController
       redirect_to mypages_index_path, success: 'flash.blogs.create'
     else
       # saveできなかった場合 nickname画面
-      flash[:notice] = "呼び名は4文字以上で登録してください"
+      flash[:notice] = "呼び名は1文字以上で登録してください"
       redirect_to names_index_path
     end
   end

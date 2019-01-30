@@ -4,7 +4,7 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :omniauthable
 
-  validates :name, presence: true, length: { minimum: 4 }
+  validates :name, presence: true, length: { minimum: 1 }
 
   def self.check_user_for_oauth(auth)
     user = User.where(uid: auth.uid, provider: auth.provider).first
@@ -28,7 +28,7 @@ class User < ApplicationRecord
    end
 
    @user
-   
+
   end
 
 end

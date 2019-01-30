@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'homes/index'
   get 'names/index'
   get 'names/create'
   get 'names/index'

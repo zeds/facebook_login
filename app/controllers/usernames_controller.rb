@@ -5,8 +5,8 @@ class UsernamesController < ApplicationController
   def create
 
 
-    # validation 4文字以上。
-    $username = params[:username]
+    # validation 1文字以上。
+    $name = params[:name]
 
     # debugger
 
@@ -14,7 +14,7 @@ class UsernamesController < ApplicationController
       uid:      $uid,
       provider: $provider,
       email:    $email,
-      name:  $username,
+      name:  $name,
       password: "hogehoge"
       # password: Devise.friendly_token[0, 20],
       # image:  auth.info.image
@@ -28,7 +28,7 @@ class UsernamesController < ApplicationController
     else
       # saveできなかった場合 nickname画面
       flash[:notice] = "usernameが正しくありません。4文字以上"
-      redirect_to usernames_index_path
+      redirect_to names_index_path
     end
 
 

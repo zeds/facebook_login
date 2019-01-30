@@ -57,7 +57,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       redirect_to mypages_index_path, success: 'flash.blogs.create'
     else
-      flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *4文字以上"
+      flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"
       redirect_to names_index_path
     end
 

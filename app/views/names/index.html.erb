@@ -1,2 +1,11 @@
 <h1>Names#index</h1>
 <p>Find me in app/views/names/index.html.erb</p>
+
+<% if flash[:notice] %>
+  <div class="alert-success"><%= flash[:notice] %></div>
+<% end %>
+
+<%= form_with url: names_create_path do |form| %>
+  <%= form.text_field :name %>
+  <%= form.submit %>
+<% end %>
