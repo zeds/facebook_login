@@ -8,7 +8,7 @@ class NamesController < ApplicationController
     # validation 4文字以上。
     $name = params[:name]
 
-    debugger
+    # debugger
 
     user = User.new(
       uid:      $uid,
@@ -20,6 +20,8 @@ class NamesController < ApplicationController
       # image:  auth.info.image
     )
 
+    #確認メールをskipする
+    user.skip_confirmation!
 
     if user.save
       flash[:notice] = "お帰りなさい"
