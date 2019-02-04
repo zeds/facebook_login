@@ -25,6 +25,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     # uid,providerが存在するか確認している
     auth = request.env['omniauth.auth']
+
+    debugger
+    
     @user = User.check_user_for_oauth(auth)
 
 

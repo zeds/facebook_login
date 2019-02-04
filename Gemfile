@@ -16,6 +16,10 @@ gem 'simple_form'
 gem 'devise-i18n'
 gem 'font-awesome-rails'
 
+#パスワード暗号方式 -> md5
+gem 'devise-encryptable'
+
+
 
 # gem 'jquery-rails'    #rails5はこれを入れないとjQueryが動きません
 

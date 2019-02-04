@@ -8,8 +8,6 @@ class NamesController < ApplicationController
     # validation 4文字以上。
     $name = params[:name]
 
-    # debugger
-
     user = User.new(
       uid:      $uid,
       provider: $provider,

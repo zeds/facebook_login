@@ -3,7 +3,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :confirmable, :omniauthable
+         :confirmable, :omniauthable, :encryptable
 
   validates :name, presence: true, length: { minimum: 1 }
 
@@ -22,7 +22,7 @@ class User < ApplicationRecord
        name:  auth.info.name,
        password: Devise.friendly_token[0, 20],
        image:  auth.info.image
-     ) # saveまでやってくれる
+     ) # User.createはsaveまでやってくれる
 
      flash[:success] = "ユーザー登録しました"
      redirect_to new_user_session_path

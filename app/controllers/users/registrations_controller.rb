@@ -5,14 +5,28 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+  def new
+    super
+  end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+
+    email = sign_up_params['email']
+    password = sign_up_params['password']
+    name = sign_up_params['name']
+
+    # @result = SlornApis.new.login_email_web("maedamin+20190130@gmail.com","hogehoge")
+    @result = SlornApis.new.find_email_web(email,password)
+
+    if @result["status"] == 1
+      flash[:notice] = "emailアドレスは既に登録されています。ログインしてください。"
+      redirect_to new_user_session_path
+      return
+    end
+
+    super
+  end
 
   # GET /resource/edit
   # def edit
