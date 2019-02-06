@@ -5,6 +5,18 @@ include ERB::Util
 
 class SlornApis
 
+  def get_customer_key_web(customer_id, retry_count = 10)
+    raise ArgumentError, 'too many HTTP redirects' if retry_count == 0
+
+    url = "https://staging-c-api.slorn.jp/v2.0.1/get_customer_key_web?customer_id=#{customer_id}"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+  end
 
   def register_customer_web(email, password, name, uid, provider, retry_count = 10)
     raise ArgumentError, 'too many HTTP redirects' if retry_count == 0
@@ -32,6 +44,23 @@ class SlornApis
     Rails.logger.error(json)
 
     return json
+  end
+
+  def find_provider_web(uid, provider, email, retry_count = 10)
+    raise ArgumentError, 'too many HTTP redirects' if retry_count == 0
+
+    email = url_encode(email)
+    url = "https://staging-c-api.slorn.jp/v2.0.1/find_provider_web?uid=#{uid}&provider=#{provider}&email=#{email}"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+
+    debugger
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+
   end
 
   #probider = "FB"

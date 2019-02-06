@@ -27,13 +27,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     auth = request.env['omniauth.auth']
 
     debugger
-    
-    @user = User.check_user_for_oauth(auth)
 
+    uid = auth.uid
+    provider = 'FB'
+    email = auth.info.email
 
-    # debugger
+    # @user = User.check_user_for_oauth(auth)
+    @result = SlornApis.new.find_provider_web(uid,'FB',email)
 
-
+    debugger
     # user = User.create(
     #   uid:      auth.uid,
     #   provider: auth.provider,

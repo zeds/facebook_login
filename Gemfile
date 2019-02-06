@@ -16,6 +16,10 @@ gem 'simple_form'
 gem 'devise-i18n'
 gem 'font-awesome-rails'
 
+gem 'rqrcode'
+gem 'rqrcode_png'
+gem 'chunky_png'
+
 #パスワード暗号方式 -> md5
 gem 'devise-encryptable'
 

@@ -29,9 +29,16 @@ class Users::SessionsController < Devise::SessionsController
     $email = @result['result']['email']
     $name = @result['result']['name']
 
+    user = User.find_by(email: $email)
+    user.customer_id = @result['result']['id']
+    user.save
+
+    sign_in(user, scope: :user)
+
+
+
     # Rails.logger.error(@result)
-    flash[:notice] = "お帰りなさい"
-    redirect_to mypages_index_path, success: 'flash.blogs.create'
+    redirect_to mypages_index_path, notice: 'お帰りなさい'
 
     # super
   end

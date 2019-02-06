@@ -1,4 +1,5 @@
-<h1>Mypages#index</h1>
-<p>Find me in app/views/mypages/index.html.erb</p>
 
-<%= link_to t('sign_out'), destroy_user_session_path, method: :delete, class: "btn btn-danger" %>
+<div align="center">
+  <p>id:<%= @id %> name:<%= @name %></p>
+  <p><%= qrcode_tag @code, module_size: 10 %></p>
+</div>

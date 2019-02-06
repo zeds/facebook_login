@@ -10,8 +10,34 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
+    <header>
+      <nav class="navbar navbar-light bg-light">
+        <%= link_to 'Slorn', homes_index_path, :class => "btn btn-danger" %>
+
+        <!-- <div class="text-left">
+          <button class="btn"><i class="fa fa-home fa-2x"></i>Slorn WEB</button>
+        </div> -->
+
+        <form class="form-inline">
+          <% if user_signed_in? %>
+            <strong><%= link_to current_user.name, mypages_index_path, :class => "btn btn-outline-primary" %></strong>
+            <%= link_to 'プロフィール変更', edit_user_registration_path, :class => "btn btn-outline-primary" %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => "btn btn-danger" %>
+          <% else %>
+            <%= link_to 'ログイン', new_user_session_path, :class => "btn btn-danger" %>
+            <%= link_to '新規登録', new_user_registration_path, :class => "btn btn-outline-primary" %>
+          <% end %>
+        </form>
+      </nav>
+    </header>
+
+    <% if flash_messages? %>
+      <div class="container-fluid">
+        <div class="container">
+          <% flash_messages %>
+        </div>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>
