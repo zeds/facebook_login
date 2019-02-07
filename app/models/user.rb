@@ -11,7 +11,7 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
   end
 
-  def self.create_email_user(email)
+  def self.create_email_user(email,customer_id)
     user = User.create(
       uid:      nil,
       provider: nil,
@@ -19,7 +19,8 @@ class User < ApplicationRecord
       name:  "hogehoge",
       password: Devise.friendly_token[0, 20],
       image:  nil,
-      confirmed_at: Time.now
+      confirmed_at: Time.now,
+      customer_id: customer_id
     ) # User.createはsaveまでやってくれる
 
   end

@@ -32,7 +32,7 @@ class Users::SessionsController < Devise::SessionsController
     user = User.find_by(email: $email)
     if user == nil
       # Slorn WEBにレコードを作成する
-      user = User.create_email_user(email)
+      user = User.create_email_user(email,id)
     end
 
     user.customer_id = @result['result']['id']

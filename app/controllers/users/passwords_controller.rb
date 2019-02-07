@@ -13,13 +13,15 @@ class Users::PasswordsController < Devise::PasswordsController
 
     # emailが存在しない。
     if @result["status"] == 0
-      flash[:notice] = "ホゲホゲ"
+      flash[:notice] = "emailが存在しません"
+      redirect_to new_user_password_path
       return
     end
 
     # emailがSlorn DBにあって、Slorn WEBにない場合、レコードを作成してしまう。
     # 存在するものとして、Deviseがメールを送ってくれる
-    @user = User.create_email_user(email)
+    customer_id = @result['result']['id']
+    @user = User.create_email_user(email,customer_id)
 
     super
   end
@@ -43,8 +45,27 @@ class Users::PasswordsController < Devise::PasswordsController
     yield resource if block_given?
 
     if resource.errors.empty?
+
+#debug customer_idを取得しているが、current_userに入れたい
+      @result = SlornApis.new.find_email_web(self.resource.email)
+
+      customer_id = @result['result']['id']
+      password = resource_params['password']
+      digest = Digest::MD5.hexdigest(password)
+
+      @result = SlornApis.new.update_customer_web(customer_id,nil,digest)
+
+      #エラーハンドリング
+      if @result["status"] == 0
+        flash[:notice] = "update_customer_webでエラーが発生しました"
+        redirect_to new_user_password_path
+        return
+      end
+
+      #正常終了
       super
     else
+      #パスワードは6文字以上に設定してください
       set_minimum_password_length
       respond_with resource
     end

@@ -5,6 +5,19 @@ include ERB::Util
 
 class SlornApis
 
+  def update_customer_web(customer_id, email, password)
+
+    email = url_encode(email)
+    url = "https://staging-c-api.slorn.jp/v2.0.1/update_customer_web?customer_id=#{customer_id}&email=#{email}&password=#{password}"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+  end
+
   def get_customer_key_web(customer_id, retry_count = 10)
     raise ArgumentError, 'too many HTTP redirects' if retry_count == 0
 
@@ -70,7 +83,6 @@ class SlornApis
     # password = "hogehoge"
 
     digest = Digest::MD5.hexdigest(password)
-
 
     # addressableのencodeで+が%2bにエンコードされなかったので。
     email = url_encode(email)
