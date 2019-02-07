@@ -11,6 +11,20 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
   end
 
+  def self.create_email_user(email)
+    user = User.create(
+      uid:      nil,
+      provider: nil,
+      email:    email,
+      name:  "hogehoge",
+      password: Devise.friendly_token[0, 20],
+      image:  nil,
+      confirmed_at: Time.now
+    ) # User.createはsaveまでやってくれる
+
+  end
+
+
   def self.find_for_oauth(auth)
    user = User.where(uid: auth.uid, provider: auth.provider).first
 

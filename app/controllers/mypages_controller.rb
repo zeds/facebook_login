@@ -11,7 +11,7 @@ class MypagesController < ApplicationController
     customer_id = current_user.customer_id
 
     @result = SlornApis.new.get_customer_key_web(customer_id)
-    debugger
+
     @code = 'customer_key:' + @result['result']
 
     @id = current_user.customer_id

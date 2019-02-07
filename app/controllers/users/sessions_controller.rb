@@ -18,18 +18,25 @@ class Users::SessionsController < Devise::SessionsController
     # @result = SlornApis.new.login_email_web("maedamin+20190130@gmail.com","hogehoge")
     @result = SlornApis.new.login_email_web(email,password)
 
+    debugger
+
     # emailが存在しない。
     if @result["status"] == 0
-      super
+      flash[:notice] = I18n.t('devise.failure.not_found_in_database')
+      redirect_to new_user_session_path
       return
     end
-
 
     $id = @result['result']['id']
     $email = @result['result']['email']
     $name = @result['result']['name']
 
     user = User.find_by(email: $email)
+    if user == nil
+      # Slorn WEBにレコードを作成する
+      user = User.create_email_user(email)
+    end
+
     user.customer_id = @result['result']['id']
     user.save
 
