@@ -21,7 +21,6 @@ class Users::PasswordsController < Devise::PasswordsController
     # 存在するものとして、Deviseがメールを送ってくれる
     @user = User.create_email_user(email)
 
-    debugger
     super
   end
 
@@ -44,7 +43,6 @@ class Users::PasswordsController < Devise::PasswordsController
     yield resource if block_given?
 
     if resource.errors.empty?
-      debugger
       super
     else
       set_minimum_password_length

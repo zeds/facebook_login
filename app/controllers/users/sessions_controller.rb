@@ -18,8 +18,6 @@ class Users::SessionsController < Devise::SessionsController
     # @result = SlornApis.new.login_email_web("maedamin+20190130@gmail.com","hogehoge")
     @result = SlornApis.new.login_email_web(email,password)
 
-    debugger
-
     # emailが存在しない。
     if @result["status"] == 0
       flash[:notice] = I18n.t('devise.failure.not_found_in_database')
