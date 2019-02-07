@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
 
+  root 'homes#index'
+  get '/homes', to: 'homes#index'
+
   get 'homes/index'
   get 'names/index'
   get 'names/create'
@@ -35,8 +38,5 @@ Rails.application.routes.draw do
   #   # get 'auth/facebook', to: 'users/omniauth_callbacks', as: :user_facebook_omniauth_callback
   # end
 
-  root 'homes#index'
-  get '/homes', to: 'homes#index'
-  get 'hello/index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

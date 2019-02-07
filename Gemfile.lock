@@ -266,6 +266,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  addressable
   autoprefixer-rails
   bootsnap (>= 1.1.0)
   bootstrap

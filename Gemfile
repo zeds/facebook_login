@@ -23,6 +23,9 @@ gem 'chunky_png'
 #パスワード暗号方式 -> md5
 gem 'devise-encryptable'
 
+#URIを扱いやすくする
+gem 'addressable'
+
 
 
 # gem 'jquery-rails'    #rails5はこれを入れないとjQueryが動きません
