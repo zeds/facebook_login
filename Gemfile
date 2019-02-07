@@ -7,6 +7,26 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'dotenv-rails'
 
+gem 'bootstrap' #4.1.3
+gem 'autoprefixer-rails' #9.4.6
+gem 'jquery-rails' #4.3.3
+gem 'simple_form'
+
+#deviseの日本語化用
+gem 'devise-i18n'
+gem 'font-awesome-rails'
+
+gem 'rqrcode'
+gem 'rqrcode_png'
+gem 'chunky_png'
+
+#パスワード暗号方式 -> md5
+gem 'devise-encryptable'
+
+
+
+# gem 'jquery-rails'    #rails5はこれを入れないとjQueryが動きません
+
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Use postgresql as the database for Active Record
