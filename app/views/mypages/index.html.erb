@@ -10,11 +10,11 @@
       <% @tickets['result'].each do |t| %>
 
           <div class="card col-md-4" >
-            <img class="card-img-top" src="..." alt="Card image cap">
+            <img class="card-img-top" src="..." alt="<%= t['issuer_shop_name'] %>">
             <div class="card-body">
               <h5 class="card-title"><%= t['title'] %></h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <a href="#" class="btn btn-primary">Go somewhere</a>
+              <p class="card-text"><%= t['description'] %></p>
+              <p class="card-title">有効期間:<%= t['valid_date_from_dot'] %> - <%= t['valid_date_to_dot'] %></p>
             </div>
           </div>
 
