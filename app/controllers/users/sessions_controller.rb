@@ -29,8 +29,6 @@ class Users::SessionsController < Devise::SessionsController
     $email = @result['result']['email']
     $name = @result['result']['name']
 
-    debugger
-
     user = User.find_by(email: $email)
     if user == nil
       # Slorn WEBにレコードを作成する
