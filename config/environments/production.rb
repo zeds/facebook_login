@@ -72,7 +72,8 @@ Rails.application.configure do
 
   # mailer setting
   # default url
-    config.action_mailer.default_url_options = {  host: 'localhost', port: 3000 }
+    host = 'whispering-tor-80588.herokuapp.com'
+    config.action_mailer.default_url_options = {  host: host, port: 443 }
     # mail setting
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
