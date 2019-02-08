@@ -10,7 +10,8 @@
       <% @tickets['result'].each do |t| %>
 
           <div class="card col-md-4" >
-            <img class="card-img-top" src="..." alt="<%= t['issuer_shop_name'] %>">
+            <p><%= t['issuer_shop_name'] %></p>
+            <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
             <div class="card-body">
               <h5 class="card-title"><%= t['title'] %></h5>
               <p class="card-text"><%= t['description'] %></p>
