@@ -25,17 +25,19 @@ class Users::SessionsController < Devise::SessionsController
       return
     end
 
-    $id = @result['result']['id']
+    $customer_id = @result['result']['id']
     $email = @result['result']['email']
     $name = @result['result']['name']
+
+    debugger
 
     user = User.find_by(email: $email)
     if user == nil
       # Slorn WEBにレコードを作成する
-      user = User.create_email_user(email,id)
+      user = User.create_email_user($email, $customer_id)
     end
 
-    user.customer_id = @result['result']['id']
+    user.customer_id = $customer_id
     user.save
 
     sign_in(user, scope: :user)

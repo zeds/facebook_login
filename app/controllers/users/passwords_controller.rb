@@ -8,6 +8,10 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
+
+    self.resource = resource_class.send_reset_password_instructions(resource_params)
+    yield resource if block_given?
+
     email = resource_params['email']
     @result = SlornApis.new.find_email_web(email)
 
@@ -23,7 +27,12 @@ class Users::PasswordsController < Devise::PasswordsController
     customer_id = @result['result']['id']
     @user = User.create_email_user(email,customer_id)
 
-    super
+    if successfully_sent?(resource)
+      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
+    else
+      respond_with(resource)
+    end
+    
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef

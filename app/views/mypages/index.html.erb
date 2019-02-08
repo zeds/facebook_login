@@ -2,4 +2,26 @@
 <div align="center">
   <p>id:<%= @customer_id %> name:<%= @name %></p>
   <p><%= qrcode_tag @code, module_size: 10 %></p>
-</div>
+
+  <% if @tickets['status'] == 1 %>
+    <div class="container">
+      <div class="row">
+
+      <% @tickets['result'].each do |t| %>
+
+          <div class="card col-md-4" >
+            <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title"><%= t['title'] %></h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+
+      <% end %>
+
+      </div>
+    </div
+  <% else %>
+    <p>保有しているチケットはありません</p>
+  <% end %>
