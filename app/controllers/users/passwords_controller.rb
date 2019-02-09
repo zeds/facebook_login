@@ -9,9 +9,6 @@ class Users::PasswordsController < Devise::PasswordsController
   # POST /resource/password
   def create
 
-    self.resource = resource_class.send_reset_password_instructions(resource_params)
-    yield resource if block_given?
-
     email = resource_params['email']
     @result = SlornApis.new.find_email_web(email)
 
@@ -19,25 +16,20 @@ class Users::PasswordsController < Devise::PasswordsController
     if @result["status"] == 0
       flash[:notice] = "emailが存在しません"
       redirect_to new_user_password_path
-      return
-    end
-
-    # emailがSlorn DBにあって、Slorn WEBにない場合、レコードを作成してしまう。
-    # 存在するものとして、Deviseがメールを送ってくれる
-    customer_id = @result['result']['id']
-    @user = User.create_email_user(email,customer_id)
-
-    if successfully_sent?(resource)
-      respond_with({}, location: after_sending_reset_password_instructions_path_for(resource_name))
     else
-      respond_with(resource)
+      # emailがSlorn DBにあって、Slorn WEBにない場合、レコードを作成してしまう。
+      # 存在するものとして、Deviseがメールを送ってくれる
+      customer_id = @result['result']['id']
+      @user = User.create_email_user(email,customer_id)
+      if @user.present?
+        super
+      end
     end
-    
+
   end
 
   # GET /resource/password/edit?reset_password_token=abcdef
-  def editgger
-    debu
+  def edit
     super
   end
 

@@ -19,7 +19,7 @@ class User < ApplicationRecord
       name:  "hogehoge",
       password: Devise.friendly_token[0, 20],
       image:  nil,
-      confirmed_at: Time.now,
+      confirmed_at: Time.now.utc,
       customer_id: customer_id
     ) # User.createはsaveまでやってくれる
 
