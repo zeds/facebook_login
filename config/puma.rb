@@ -14,9 +14,9 @@ environment ENV.fetch("RAILS_ENV") { "development" }
 
 # socketの設定
 # ディレクトリがない場合は作成しておく
-# portでのlistenはコメントアウトしておく
-port        ENV.fetch("PORT") { 3000 }
-# bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
+# nginx経由で実行の場合、portでのlistenはコメントアウトしておく
+# port        ENV.fetch("PORT") { 3000 }
+bind "unix://#{Rails.root}/tmp/sockets/puma.sock"
 
 # Specifies the number of `workers` to boot in clustered mode.
 # Workers are forked webserver processes. If using threads and workers together
