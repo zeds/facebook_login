@@ -7,7 +7,7 @@
 # server "example.com", user: "deploy", roles: %w{app web}, other_property: :other_value
 # server "db.example.com", user: "deploy", roles: %w{db}
 
-server "mykhe.fun", user: "deploy", roles: %w{app db web}
+server "slorn-web.jp", user: "deploy", roles: %w{app db web}
 
 set :ssh_options, {
   keys: %w(~/.ssh/id_rsa),
