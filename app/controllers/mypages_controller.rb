@@ -14,7 +14,7 @@ class MypagesController < ApplicationController
 
     @code = 'customer_key:' + @result['result']
 
-    @tickets = SlornApis.new.get_all_my_ticket_web(16)
+    @tickets = SlornApis.new.get_all_my_ticket_web(@customer_id)
 
     if @tickets["status"] == 0
       flash[:notice] = "保有しているチケットはありません"
