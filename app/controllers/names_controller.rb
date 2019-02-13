@@ -24,7 +24,7 @@ class NamesController < ApplicationController
     if user.save
       flash[:notice] = "お帰りなさい"
       sign_in(user, scope: :user)
-      redirect_to mypages_index_path, success: 'flash.blogs.create'
+      redirect_to mypages_index_path
     else
       # saveできなかった場合 nickname画面
       flash[:notice] = "呼び名は1文字以上で登録してください"

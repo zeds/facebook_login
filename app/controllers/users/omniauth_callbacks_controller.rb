@@ -11,18 +11,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def callback_from(provider)
 
-    # user_data = request.env['omniauth.auth']
-    # logger.debug "user_data=" + user_data.to_s
-    # session[:name] = user_data[:info][:name]
-    # redirect_to root_path, notice: 'ログインしました'
-
-
-    # auth=#<OmniAuth::AuthHash credentials=#<OmniAuth::AuthHash expires=true expires_at=1553746904 token="EAAOdBnGgNQMBAPZAsxM2ZCS5v5ZAZCKbGTxAXAQyDYhybDsUC4MRisKUERLTk4IXlhvaFE8u2XyRDPoc0EBNk0ZBA3iKKJ5EXK1dPTASNfABzdvmKxnWzo9UMyPF4sWFAGMwdcGk6IQmMS2IWm1GuCy7Fea9pbAEZD"> extra=#<OmniAuth::AuthHash raw_info=#<OmniAuth::AuthHash
-    # email="tom_z39@yahoo.co.jp" id="10156939163661460" name="Tsutomu Okumura">> info=#<OmniAuth::AuthHash::InfoHash
-    # email="tom_z39@yahoo.co.jp" image="http://graph.facebook.com/v2.10/10156939163661460/picture"
-    # name="Tsutomu Okumura"> provider="facebook" uid="10156939163661460">
-
-
     # uid,providerが存在するか確認している
     auth = request.env['omniauth.auth']
     uid = auth.uid
@@ -55,7 +43,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.save
       sign_in(@user, scope: :user)
 
-      redirect_to mypages_index_path, success: 'flash.blogs.create'
+      redirect_to mypages_index_path
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"
       redirect_to names_index_path

@@ -22,7 +22,7 @@ class UsernamesController < ApplicationController
     if user.save
       flash[:notice] = "お帰りなさい"
       sign_in(user, scope: :user)
-      redirect_to mypages_index_path, success: 'flash.blogs.create'
+      redirect_to mypages_index_path
     else
       # saveできなかった場合 nickname画面
       flash[:notice] = "usernameが正しくありません。4文字以上"
