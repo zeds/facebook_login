@@ -9,6 +9,8 @@ module Devise
           # str = [password, salt].flatten.compact.join
           # Digest::MD5.hexdigest(str)
           Digest::MD5.hexdigest(password)
+
+          debugger
         end
       end
     end

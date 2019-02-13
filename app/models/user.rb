@@ -43,7 +43,7 @@ class User < ApplicationRecord
      redirect_to new_user_session_path
    end
 
-   @user
+   user
 
   end
 
