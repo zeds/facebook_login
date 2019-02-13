@@ -259,7 +259,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   # config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET_KEY']
-  config.omniauth :facebook, ENV['MYKHE_FACEBOOK_ID'], ENV['MYKHE_FACEBOOK_SECRET_KEY'], info_fields: 'email,name,birthday', :client_options => { :site => 'https://graph.facebook.com/v2.8', :authorize_url => "https://www.facebook.com/v2.8/dialog/oauth" }
+  config.omniauth :facebook, ENV['FACEBOOK_ID'], ENV['FACEBOOK_SECRET_KEY'], info_fields: 'email,name,birthday', :client_options => { :site => 'https://graph.facebook.com/v2.8', :authorize_url => "https://www.facebook.com/v2.8/dialog/oauth" }
 
 
   # ==> Warden configuration
