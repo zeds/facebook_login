@@ -25,7 +25,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     # uid,providerが存在するか確認している
     auth = request.env['omniauth.auth']
-
+    
     uid = auth.uid
     provider = 'FB'
     email = auth.info.email

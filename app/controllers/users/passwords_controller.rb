@@ -8,12 +8,8 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # POST /resource/password
   def create
-    # super
-    # return
-
     email = resource_params['email']
     @result = SlornApis.new.find_email_web(email)
-
 
     # emailが存在しない。
     if @result["status"] == 0
@@ -25,6 +21,7 @@ class Users::PasswordsController < Devise::PasswordsController
       my_sign_up_params["email"] = email
       my_sign_up_params["password"] = "sign_up_password"
       my_sign_up_params["name"] = @result["result"]["name"]
+      # 重複チェックされているかわからないのだが、同じレコードが存在するとき上書きされている？
       self.resource = resource_class.new_with_session(my_sign_up_params, session)
       self.resource.skip_confirmation!
       self.resource.save
@@ -81,6 +78,9 @@ class Users::PasswordsController < Devise::PasswordsController
         digest = Digest::MD5.hexdigest(password)
 
         @result = SlornApis.new.update_customer_web(customer_id,nil,digest)
+
+
+        debugger
 
         # emailが存在しない。
         if @result["status"] == 0

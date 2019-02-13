@@ -21,7 +21,7 @@ class SlornApis
   def update_customer_web(customer_id, email, password)
 
     email = url_encode(email)
-    url = "https://staging-c-api.slorn.jp/v2.0.1/get_all_my_ticket_web?customer_id=#{customer_id}&email=#{email}&password=#{password}"
+    url = "https://staging-c-api.slorn.jp/v2.0.1/update_customer_web?customer_id=#{customer_id}&email=#{email}&password=#{password}"
     uri = Addressable::URI.parse(url)
     uri.port = 443
 
