@@ -25,36 +25,34 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     # uid,providerが存在するか確認している
     auth = request.env['omniauth.auth']
-    
     uid = auth.uid
     provider = 'FB'
     email = auth.info.email
+    name = auth.info.name
+
+    # uid = '10155098615466460'
+    # digest = Digest::MD5.hexdigest(uid)
 
     # @user = User.check_user_for_oauth(auth)
     @result = SlornApis.new.find_provider_web(uid,'FB',email)
 
-    # user = User.create(
-    #   uid:      auth.uid,
-    #   provider: auth.provider,
-    #   email:    auth.info.email,
-    #   name:  auth.info.name,
-    #   password: Devise.friendly_token[0, 20],
-    #   image:  auth.info.image
-    # )
-
-    # facebook より取得
-    $uid = auth.uid
-    $provider = auth.provider
-    $email = auth.info.email
-    $name = auth.info.name
-
-    logger.debug "******* omniauth ******"
-
-
-    # Userが存在する場合、MyPagesへ
-    # 存在しない場合、username入力画面へ
-    if @user.present?
+    if @result['status'] == 1
       flash[:notice] = "お帰りなさい"
+
+      my_sign_up_params = {}
+      my_sign_up_params["email"] = email
+      my_sign_up_params["password"] = "sign_up_password"
+      my_sign_up_params["name"] = name
+      # 重複チェックされているかわからないのだが、同じレコードが存在するとき上書きされている？
+      self.resource = resource_class.new_with_session(my_sign_up_params, session)
+      self.resource.skip_confirmation!
+      self.resource.save
+
+      #passwordを再送するには、Slorn WEBにUserレコードが必要
+      #customer_idを追加する
+      @user = User.find_by(email: email)
+      @user.customer_id = @result['result']['id']
+      @user.save
       sign_in(@user, scope: :user)
 
       redirect_to mypages_index_path, success: 'flash.blogs.create'
@@ -63,21 +61,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to names_index_path
     end
 
-    return
-
-    provider = provider.to_s
-
-# 認証に成功したら、情報をDBに書き込んでいる。
-# このタイミングでは、書き込みたくない。
-    @user = User.find_for_oauth(request.env['omniauth.auth'])
-
-    if @user.persisted?
-      flash[:notice] = I18n.t('devise.omniauth_callbacks.success', kind: provider.capitalize)
-      sign_in_and_redirect @user, event: :authentication
-    else
-      session["devise.#{provider}_data"] = request.env['omniauth.auth']
-      redirect_to new_user_registration_url
-    end
   end
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
