@@ -79,9 +79,6 @@ class Users::PasswordsController < Devise::PasswordsController
 
         @result = SlornApis.new.update_customer_web(customer_id,nil,digest)
 
-
-        debugger
-
         # emailが存在しない。
         if @result["status"] == 0
           flash[:notice] = "error : update_customer_web"
