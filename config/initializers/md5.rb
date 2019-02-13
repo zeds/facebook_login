@@ -10,7 +10,6 @@ module Devise
           # Digest::MD5.hexdigest(str)
           Digest::MD5.hexdigest(password)
 
-          debugger
         end
       end
     end
