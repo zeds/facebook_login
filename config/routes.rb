@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get 'posts/index'
+  get 'posts/show'
+  get 'posts/create'
+  get 'posts/:id', to:'posts#show'
   root 'homes#index'
   get '/homes', to: 'homes#index'
 
