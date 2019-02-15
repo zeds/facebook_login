@@ -10,12 +10,14 @@
       <% @tickets['result'].each do |t| %>
 
           <div class="card col-md-4" >
-            <p><%= t['issuer_shop_name'] %></p>
-            <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
-            <div class="card-body">
-              <h5 class="card-title"><%= t['title'] %></h5>
-              <p class="card-text"><%= t['description'] %></p>
-              <p class="card-title">有効期間:<%= t['valid_date_from_dot'] %> - <%= t['valid_date_to_dot'] %></p>
+            <div class="card" style="width: 18rem;">
+              <p><%= t['issuer_shop_name'] %></p>
+              <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
+              <div class="card-body">
+                <h5 class="card-title"><%= t['title'] %></h5>
+                <p class="card-text"><%= t['description'] %></p>
+                <p class="card-title">有効期間:<%= t['valid_date_from_dot'] %> - <%= t['valid_date_to_dot'] %></p>
+              </div>
             </div>
           </div>
 
