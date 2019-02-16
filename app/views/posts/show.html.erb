@@ -1,17 +1,12 @@
-<h1>Posts#show</h1>
-<p>Find me in app/views/posts/show.html.erb</p>
 <div class="row">
   <div class="container-fluid mt-4">
       <div class="row justify-content-center">
           <div class="col-auto mb-3">
-              <div class="card" style="width: 22rem;">
+              <div class="card bg-light" style="width: 30rem;">
                   <div class="card-body">
-                      <h5 class="card-title">Card title</h5>
-                      <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-                      <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-                      <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
-
+                    <%= @result['title']['rendered'].html_safe %>
+                    <%= @result['content']['rendered'].html_safe %>
+                    <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
                   </div>
               </div>
           </div>

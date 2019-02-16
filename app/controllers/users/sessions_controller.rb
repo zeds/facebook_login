@@ -4,7 +4,6 @@ class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
   protect_from_forgery except: [:new,:create] # searchアクションを除外
 
-
   # GET /resource/sign_in
   def new
     super
@@ -42,10 +41,11 @@ class Users::SessionsController < Devise::SessionsController
 
     sign_in(user, scope: :user)
 
-
-
-    # Rails.logger.error(@result)
-    redirect_to mypages_index_path, notice: 'お帰りなさい'
+    if session[:user_return_to] != nil
+      redirect_to session[:user_return_to]
+    else
+      redirect_to mypages_index_path, notice: 'お帰りなさい'
+    end
 
     # super
   end

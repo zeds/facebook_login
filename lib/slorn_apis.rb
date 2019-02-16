@@ -5,6 +5,17 @@ include ERB::Util
 
 class SlornApis
 
+  def get_post_from_wordpress(post_id)
+    url = "https://slorn.jp/wp-json/wp/v2/posts/#{post_id}"
+    uri = Addressable::URI.parse(url)
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+
+  end
+
   def get_all_my_ticket_web(customer_id)
     email = url_encode(email)
     url = "https://staging-c-api.slorn.jp/v2.0.1/get_all_my_ticket_web?customer_id=#{customer_id}"
