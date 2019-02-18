@@ -4,31 +4,24 @@
 
 <div class="container">
   <div class="row">
-    <div class="card col-md-4" >
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <%= link_to "詳細", posts_show_path(:id => '887'), :class => 'btn btn-primary' %>
-      </div>
-    </div>
 
-    <div class="card col-md-4" >
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
 
-    <div class="card col-md-4" >
-      <img class="card-img-top" src="..." alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title">Card title</h5>
-        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
-      </div>
-    </div>
+    <% @array.each do |t| %>
+
+        <div class="card col-md-4" >
+          <div class="card" style="width: 18rem;">
+            <p><%= t['title']['rendered'] %></p>
+            <div class="yokonarabi">
+              <% t['images'].each do |icon| %>
+                <%= image_tag icon, :size=>'40x40' %>
+              <% end %>
+            </div>
+
+            <%= link_to "詳細", posts_show_path(:id => t['id']), :class => 'btn btn-primary' %>
+          </div>
+        </div>
+
+    <% end %>
+
   </div>
 </div>

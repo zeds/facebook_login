@@ -3,9 +3,8 @@ class PostsController < ApplicationController
   end
 
   def show
-    response.headers.delete "X-Frame-Options"
     $id = params['id']
-    @result = SlornApis.new.get_post_from_wordpress($id)
+    @detail = SlornApis.new.get_product_detail($id)
   end
 
   #購入

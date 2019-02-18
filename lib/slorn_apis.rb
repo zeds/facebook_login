@@ -5,11 +5,33 @@ include ERB::Util
 
 class SlornApis
 
+  def get_product_detail(post_id)
+    url = "https://slorn.jp/wp-json/wp/v2/ticket/#{post_id}"
+    uri = Addressable::URI.parse(url)
+
+    json = call_http_wordpress(uri)
+    Rails.logger.error(json)
+
+    return json
+
+  end
+
+  def get_available_products
+    url = "https://staging-c-api.slorn.jp/v2.0.1/get_available_products"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+  end
+
   def get_post_from_wordpress(post_id)
     url = "https://slorn.jp/wp-json/wp/v2/posts/#{post_id}"
     uri = Addressable::URI.parse(url)
 
-    json = call_http(uri)
+    json = call_http_wordpress(uri)
     Rails.logger.error(json)
 
     return json
@@ -151,4 +173,34 @@ class SlornApis
       raise e
     end
   end
+
+  def call_http_wordpress(uri)
+
+    begin
+      response = Net::HTTP.start(uri.host, uri.port, use_ssl: uri.scheme = 'https') do |http|
+        http.open_timeout = 5
+        http.read_timeout = 10
+        http.get(uri.request_uri)
+      end
+
+
+      case response
+        when Net::HTTPSuccess
+          json = JSON.parse(response.body)
+          return json
+
+        when Net::HTTPRedirection
+          location = response['location']
+          Rails.logger.error(warn "redirected to #{location}")
+        else
+          # Rails.logger.error([uri.to_s, response.value].join(" : "))
+          Rails.logger.error("見つかりませんでした！")
+      end
+    rescue => e
+      Rails.logger.error(e.message)
+      raise e
+    end
+  end
+
+
 end
