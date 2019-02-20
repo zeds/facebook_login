@@ -4,15 +4,24 @@
 
 <div class="container">
   <div class="row">
-
-
     <% @array.each do |t| %>
-
-        <div class="card col-md-4" >
-          <div class="card" style="width: 18rem;">
-            <p><%= t['title']['rendered'] %></p>
+        <div class="card col-md-3" >
+          <div class="card" style="width: 30rem;">
+            <table>
+              <tr>
+                <td><%= image_tag t['ticket_image_url'], :size=>'80x80' %></td>
+                <td>
+                  <span style="font-weight: bold">
+                    <%= t['title']['rendered'] %><br/>
+                  </span>
+                  有効期限：<%= t['period'] %><br/>
+                  販売価格：<%= t['price'] %>
+                </td>
+              </tr>
+            </table>
+            <%= t['caption'] %><br/>
             <div class="yokonarabi">
-              <% t['images'].each do |icon| %>
+              <% t['shop_images'].each do |icon| %>
                 <%= image_tag icon, :size=>'40x40' %>
               <% end %>
             </div>

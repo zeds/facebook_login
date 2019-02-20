@@ -5,7 +5,6 @@ class HomesController < ApplicationController
     @result = SlornApis.new.get_available_products
 
     @array = []
-    @hash = {}
 
     #post_idを取得する
     for product in @result["result"]["products"] do
@@ -13,6 +12,7 @@ class HomesController < ApplicationController
 
        #詳細を取得
        @detail = SlornApis.new.get_product_detail(post_id)
+       @hash = {}
 
        #wordpressはエラーの時trueを返す
        if @detail == true
@@ -25,7 +25,8 @@ class HomesController < ApplicationController
          for shops in product["shops"] do
            @array_image.push("https://s3-ap-northeast-1.amazonaws.com/test-s3.slorn.jp/pub/shoplogo/origin/" + shops["icon"] + "/200x200.jpg")
          end
-         @hash["images"] = @array_image
+         @hash["ticket_image_url"] = @detail["ticket_image_url"]
+         @hash["shop_images"] = @array_image
          @hash["caption"] = @detail["ticket_caption"]
          @hash["price"] = @detail["ticket_price"]
          @hash["billing"] = @detail["ticket_billing"]

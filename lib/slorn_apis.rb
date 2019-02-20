@@ -5,6 +5,41 @@ include ERB::Util
 
 class SlornApis
 
+  def post_robot_payment(customer_id, email)
+    url = "https://credit.j-payment.co.jp/gateway/payform.aspx"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+    # インスタンスを生成
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = uri.scheme === "https"
+    http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+
+    http.ssl_version = 'TLSv1'  #        -- or SSLv3, but TLSv1 is better
+    http.ciphers = ['RC4-SHA']
+    #送りたいデータを格納
+    params = {
+      aid: '116389',
+      pt: '1',
+      jb: 'CAPTURE',
+      cod: '16',
+      iid: '234',
+      customer_id: '16',
+      em: 'mm0607@hotmail.com',
+      pr_code: '234'
+    }
+
+    headers = { "Content-Type": "application/json" }
+    response = Net::HTTP::Post.new(uri)
+    request.body = params.to_json
+
+    #send request
+    response = http.request(request)
+
+    response.code # status code
+    response.body # response body
+
+  end
+
   def get_product_detail(post_id)
     url = "https://slorn.jp/wp-json/wp/v2/ticket/#{post_id}"
     uri = Addressable::URI.parse(url)

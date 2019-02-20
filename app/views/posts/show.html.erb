@@ -5,7 +5,7 @@
               <div class="card bg-light" style="width: 40rem;">
                   <div class="card-body">
                     <a class="navbar-brand" href="/">
-                      <img src="<%= @detail['ticket_image_url'] %>" alt="">
+                      <%= image_tag @detail['ticket_image_url'], :size=>'80x80' %>
                     </a>
                     <%= @detail['title']['rendered'].html_safe %><br/>
 
@@ -13,9 +13,35 @@
                     <br/>
                     価格：<%= @detail['ticket_price'] %><br/>
                     有効期限：<%= @detail['ticket_period'] %><br/>
-                    <br/>
+
+                    <font size="4" color="#ff0000">
+                      <strong>
+                      <p><%= @detail['ticket_billing'].html_safe %><p><br/>
+                      </strong>
+                    </font>
 
                     <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
+
+                    <form action="https://credit.j-payment.co.jp/gateway/payform.aspx" method="POST">
+                    <input name="aid" type="HIDDEN" value="115406" />
+                    <input name="pt" type="HIDDEN" value="1" />
+                    <input name="jb" type="HIDDEN" value="CAPTURE" />
+                    <input name="cod" type="HIDDEN" value="16" />
+                    <input name="iid" type="HIDDEN" value="123" />
+                    <input name="customer_id" type="HIDDEN" value="16" />
+                    <input name="em" type="HIDDEN" value="mm0607@hotmail.com" />
+                    <input name="pr_code" type="HIDDEN" value="123" />
+                    <input name="submit" type="submit" value="購入（決済サイトへリンクします）" /></form>
+
+<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+    <a class="a2a_button_facebook"></a>
+    <a class="a2a_button_twitter"></a>
+    <a class="a2a_button_google_plus"></a>
+    <a class="a2a_button_pinterest"></a>
+    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
+</div>
+<script async src="https://static.addtoany.com/menu/page.js"></script>
+
                   </div>
               </div>
           </div>

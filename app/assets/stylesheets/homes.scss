@@ -8,4 +8,15 @@
   margin: 10px;
   padding: 10px;
   background-color: #ffffff;
+  float: left;
+}
+
+
+.img.fl {
+  float: left;
+  word-break: normal;
+}
+
+p.nomal{
+ word-break: normal;  //テキストを行末で折り返す
 }
