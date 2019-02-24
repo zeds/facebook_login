@@ -9,16 +9,19 @@ class HomesController < ApplicationController
     #post_idを取得する
     for product in @result["result"]["products"] do
 	     post_id = product["post_id"]
+       pr_code = product["pr_code"]
 
        #詳細を取得
        @detail = SlornApis.new.get_product_detail(post_id)
        @hash = {}
+
 
        #wordpressはエラーの時trueを返す
        if @detail == true
          # nothing to be done
        else
          @hash["id"] = @detail["id"]
+         @hash["pr_code"] = pr_code
          @hash["title"] = @detail["title"]
 
          @array_image = []

@@ -1,7 +1,6 @@
 <div align="center">
 <h2>販売チケット一覧</h2>
 </div>
-
 <div class="container">
   <div class="row">
     <% @array.each do |t| %>
@@ -26,7 +25,7 @@
               <% end %>
             </div>
 
-            <%= link_to "詳細", posts_show_path(:id => t['id']), :class => 'btn btn-primary' %>
+            <%= link_to "詳細", posts_show_path(:id => t['id'], :pr_code => t['pr_code']), :class => 'btn btn-primary' %>
           </div>
         </div>
 
