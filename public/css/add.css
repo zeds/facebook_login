@@ -1,0 +1,255 @@
+/*
+  Structure
+*/
+.container{
+  margin: 0 auto;
+}
+.navbar{
+  padding: 10px 0;
+}
+.row{
+  margin: 0;
+}
+.main{
+  background: #e6e6e6;
+  padding: 0 0 30px;
+}
+.navbar-brand{
+  width: 92px;
+}
+.navbar-brand img{
+  width: 100%;
+  height: auto;
+}
+.btn-success{
+  background: #ff704b;
+  border: 1px solid #ff704b;
+}
+@media (min-width: 768px) {
+  .navbar-brand{
+    width: 184px;
+  }
+}
+
+/*
+  List
+*/
+.card{
+  flex: 0 0 100%;
+  margin: 0 0 10px;
+  padding: 15px;
+  border: none;
+  display: flex;
+  flex-flow: column;
+}
+.card td{
+  vertical-align: top;
+}
+.page_title{
+  font-size: 28px;
+  text-align: center;
+  padding: 30px 0;
+  margin: 0;
+}
+.card_header{
+  display: flex;
+  align-items: center;
+  margin: 0 0 15px;
+}
+.card_image{
+  margin: 0 10px 0 0;
+  line-height: 0;
+}
+.card_title{
+  line-height: 1.4;
+  font-weight: bold;
+}
+.card_info{
+  margin: 0 0 5px;
+}
+.card_info > dt{
+  font-weight: normal;
+  font-size: 12px;
+  color: #999;
+  flex: 0 0 4.5em;
+}
+.card_info > dd{
+  line-height: 1.2;
+  font-weight: bold;
+  color: #ff704b;
+  margin: 0;
+  font-size: 15px;
+}
+.card_shop{
+  margin: 0 0 5px;
+}
+.card_shop > dt{
+  font-weight: normal;
+  font-size: 12px;
+  color: #999;
+}
+.card_shop > dd{
+  line-height: 1.2;
+  font-weight: bold;
+  color: #ff704b;
+  margin: 0;
+}
+.card_text{
+  height: 4.5em;
+  overflow: hidden;
+}
+.yokonarabi{
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: flex;
+  flex-flow: wrap;
+  list-style: none;
+  float: none;
+}
+.yokonarabi > li{
+  flex: 0 0 16%;
+  padding: 2px;
+}
+.yokonarabi img{
+  width: 100%;
+  height: auto;
+}
+.card .btn{
+  background: #ff704b;
+  border: none;
+  margin: auto 0 0;
+}
+.card_detail{
+  padding: 30px 0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+.card_detail p{
+  margin: 1em 0;
+}
+.card-body{
+  background: #fff;
+  border-radius: 5px;
+}
+.card_detail .btn{
+  background: #ff704b;
+  display: block;
+  width: 100%;
+  color: #fff;
+}
+.card_detail .yokonarabi > li{
+  flex: 0 0 40px;
+}
+.form-inline > a{
+  margin-left: 10px;
+}
+.notice{
+  color: #d0021b;
+  font-weight: bold;
+}
+.card_submit{
+  margin: 0 0 15px;
+}
+@media (min-width: 320px) {
+  .form-inline > a{
+    margin-left: 5px;
+  }
+}
+@media (min-width: 768px) {
+  .row{
+    margin: 0 0 0 -2%;
+  }
+  .card{
+    flex: 0 0 31%;
+    margin: 0 0 2% 2%;
+  }
+  .page_title{
+    padding: 60px 0;
+  }
+
+}
+@media (min-width: 992px) {
+  .card{
+    flex: 0 0 23%;
+  }
+}
+
+/*
+  Detail
+*/
+
+/*
+  Mypage
+*/
+.ticket_qr{
+  text-align: center;
+  margin: 0 0 30px;
+}
+.ticket_shop{
+  line-height: 1.2;
+}
+.card-title{
+  font-size: 20px;
+  margin: 10px 0;
+}
+.card_bottom{
+  margin: auto 0 0;
+}
+.card_bottom .btn{
+  display: block;
+  margin: 15px 0 0;
+}
+/*
+  Form
+*/
+.form_area{
+  background: #fff;
+  padding: 30px 20px;
+  max-width: 400px;
+  margin: 0 auto;
+  border-radius: 5px;
+}
+.button_to input[type="submit"]{
+  width: 100%;
+}
+.edit_return{
+  margin: 5px 0 0;
+}
+.edit_return a{
+  display: block;
+}
+/*
+  Footer
+*/
+.footer{
+   margin: 0;
+   padding: 10px 0;
+   background: #fff;
+}
+.footer nav{
+  margin: 20px 0 30px;
+}
+.footer nav > ul{
+  float: none;
+  margin: 0;
+  padding: 0;
+}
+.footer nav > ul > li{
+  float: none;
+}
+.footer small{
+  float: none;
+  text-align: center;
+  display: block;
+  font-size: 11px;
+}
+@media (min-width: 768px) {
+  .footer nav > ul > li{
+    display: inline-block;
+    margin: 0 1.5em 0 0;
+  }
+  .footer small{
+    text-align: right;
+  }
+}
