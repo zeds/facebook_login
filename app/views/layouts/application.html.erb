@@ -35,14 +35,18 @@
     </header>
 
     <% if flash_messages? %>
-      <div class="container-fluid">
-        <div class="container">
-          <% flash_messages %>
+        <div class="container-fluid">
+          <div class="container">
+            <% flash_messages %>
+          </div>
         </div>
-      </div>
     <% end %>
 
-    <%= yield %>
+    <div class="main">
+      <div class="container">
+        <%= yield %>
+      </div>
+    </div>
     <%= render 'layouts/footer' %>
   </body>
 </html>
