@@ -15,13 +15,39 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def password_update
-    debugger
     customer_id = current_user["customer_id"]
     current_password = params["user"]["current_password"]
-    
-    # "current_password"=>"", "password"=>"", "password_confirmation"=>""
+    password = params["user"]["password"]
+    password_confirmation = params["user"]["password_confirmation"]
 
+    if current_password.length == 0 || password.length == 0 || password_confirmation == 0
+      flash[:notice] = "空の項目があります"
+    else
+      if password.length < Devise.password_length.min || password_confirmation.length < Devise.password_length.min
+        flash[:notice] = "パスワードは" + Devise.password_length.min.to_s + "文字以上にしてください"
+      else
+        # 現在のパスワードが正しいか調べる
+        @user = User.find_by_id(current_user.id)
+        current_digest = Digest::MD5.hexdigest(current_password)
 
+        if @user.encrypted_password != current_digest
+          flash[:notice] = "現在のパスワードが正しくありません"
+        else
+          # customer_id : 778
+          digest = Digest::MD5.hexdigest(password)
+          @result = SlornApis.new.update_customer_web(current_user.customer_id,nil,digest)
+
+          if @result["status"] == 0
+            flash[:notice] = "error : update_customer_web"
+          else
+            # d487
+            flash[:notice] = "パスワードを更新しました"
+          end
+        end
+      end
+    end
+
+    redirect_to password_edit_path
 
   end
 

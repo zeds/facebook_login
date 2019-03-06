@@ -22,9 +22,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     uid = nil
     provider = nil
 
-    # str = ["hogehoge", self.resource.password_salt].flatten.compact.join
-    # digest = Digest::MD5.hexdigest(str)
-
     @result = SlornApis.new.register_customer_web(email, password, name, uid, provider)
 
     # 成功
