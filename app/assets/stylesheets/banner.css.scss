@@ -1,0 +1,218 @@
+#banner_app {
+  display: none;
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background: #fff;
+  &:before {
+    content: '';
+    display: block;
+    background: linear-gradient(to right, #ec6b4e, #ff685e);
+    height: 4px;
+  }
+  p {
+    color: #000;
+    padding: 10px 10px 5px;
+    text-align: left;
+    font-size: 12px;
+  }
+  ul {
+    display: flex;
+    align-items: center;
+    margin: 0 0 10px;
+    padding: 0 10px;
+  }
+  .icon {
+    flex: 0 0 35px;
+  }
+  .to_store {
+    flex: 1 1 50%;
+    margin: 0 2px 0 0;
+    a {
+      background: linear-gradient(to right, #ec6b4e, #ff685e);
+      display: block;
+      padding: 5px 10px;
+      font-size: 12px;
+      font-weight: bold;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid #e2705d;
+      text-align: center;
+      border-radius: 5px;
+    }
+  }
+  .open_app {
+    flex: 1 1 50%;
+    margin: 0 0 0 2px;
+    a {
+      display: block;
+      font-weight: bold;
+      padding: 5px 10px;
+      font-size: 12px;
+      color: #e2705d;
+      text-decoration: none;
+      border: 1px solid #e2705d;
+      text-align: center;
+      border-radius: 5px;
+    }
+  }
+  .appstore {
+    flex: 0 0 217px;
+    margin: 0 25px 0 0;
+  }
+  .googleplay {
+    flex: 0 0 220px;
+  }
+  .caption {
+    flex: 1 1 auto;
+    font-size: 12px;
+    color: #000;
+    text-align: left;
+    padding: 0 25px;
+  }
+  a {
+    transition: opacity .5s;
+    &:hover {
+      opacity: 0.7;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  #banner_app {
+    min-width: 960px;
+  }
+}
+
+@media (min-width: 768px) {
+  #banner_app ul {
+    margin: 35px auto 20px;
+    width: 910px;
+    padding: 0;
+  }
+}
+
+@media (min-width: 768px) {
+  #banner_app .icon {
+    flex: 0 0 80px;
+  }
+}
+
+@media (min-width: 768px) {
+  #banner_app .caption {
+    font-size: 24px;
+  }
+}
+
+.banner_on {
+  padding: 0 0 74px;
+  #banner_app {
+    display: block;
+  }
+}
+
+@media (min-width: 768px) {
+  .banner_on {
+    padding: 0 0 144px;
+  }
+}
+
+#button_close_banner {
+  position: absolute;
+  width: 17px;
+  height: 17px;
+  cursor: pointer;
+  right: 10px;
+  bottom: 45px;
+}
+
+@media (min-width: 768px) {
+  #button_close_banner {
+    right: 15px;
+    bottom: 110px;
+  }
+}
+
+#button_close_banner_in {
+  position: relative;
+  right: 0;
+  bottom: 0;
+  display: inline-block;
+  margin: 0 20px 0 7px;
+  padding: 0;
+  width: 2px;
+  height: 10px;
+  background: #bababa;
+  transform: rotate(45deg);
+  span {
+    display: none;
+  }
+  &:before {
+    display: block;
+    content: "";
+    position: absolute;
+    right: -4px;
+    bottom: 4px;
+    width: 10px;
+    height: 2px;
+    background: #bababa;
+  }
+}
+
+@media (min-width: 768px) {
+  #button_close_banner_in {
+    height: 20px;
+  }
+}
+
+@media (min-width: 768px) {
+  #button_close_banner_in:before {
+    width: 20px;
+    right: -9px;
+    bottom: 9px;
+  }
+}
+
+@-moz-keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@-webkit-keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@-o-keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+
+@keyframes show {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

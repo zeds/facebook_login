@@ -10,6 +10,8 @@ gem 'dotenv-rails'
 gem 'bootstrap' #4.1.3
 gem 'autoprefixer-rails' #9.4.6
 gem 'jquery-rails' #4.3.3
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 gem 'simple_form'
 
 #deviseの日本語化用
