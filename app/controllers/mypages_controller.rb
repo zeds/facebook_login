@@ -17,8 +17,15 @@ class MypagesController < ApplicationController
     # @tickets = SlornApis.new.get_all_my_ticket_web(@customer_id)
     @tickets = SlornApis.new.get_all_my_ticket_web(16)
 
+
     if @tickets["status"] == 0
       flash[:notice] = "保有しているチケットはありません"
+    else
+      for ticket in @tickets["result"] do
+        for shops in ticket["shops"] do
+          shops['shop_icon'] = "https://s3-ap-northeast-1.amazonaws.com/test-s3.slorn.jp/pub/shoplogo/origin/" + shops["icon"] + "/200x200.jpg"
+        end
+      end
     end
 
 

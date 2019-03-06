@@ -1,55 +1,62 @@
-<div class="row">
-  <div class="container-fluid mt-4">
-      <div class="row justify-content-center">
-          <div class="col-auto mb-3">
-              <div class="card bg-light" style="width: 40rem;">
-                  <div class="card-body">
-                    <a class="navbar-brand" href="/">
-                      <%= image_tag @detail['ticket_image_url'], :size=>'80x80' %>
-                    </a>
-                    <%= @detail['title']['rendered'].html_safe %><br/>
-
-                    <%= @detail['ticket_caption'] %><br/>
-                    <br/>
-                    価格：<%= @detail['ticket_price'] %><br/>
-                    有効期限：<%= @detail['ticket_period'] %><br/>
-
-                    <font size="4" color="#ff0000">
-                      <strong>
-                      <p><%= @detail['ticket_billing'].html_safe %><p><br/>
-                      </strong>
-                    </font>
-
-                    <% if @show_buy_button == true %>
-                      <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
-                    <% else %>
-                      <form action="https://credit.j-payment.co.jp/gateway/payform.aspx" method="POST" target="_blank">
-                      <input name="aid" type="HIDDEN" value="116389" />
-                      <input name="pt" type="HIDDEN" value="1" />
-                      <input name="jb" type="HIDDEN" value="CAPTURE" />
-                      <input name="cod" type="HIDDEN" value=<%= @customer_id %> />
-                      <input name="cmd" type="HIDDEN" value="2" />
-                      <input name="iid" type="HIDDEN" value=<%= @pr_code %> />
-                      <input name="customer_id" type="HIDDEN" value=<%= @customer_id %> />
-                      <input name="em" type="HIDDEN" value=<%= @em %> />
-                      <input name="pr_code" type="HIDDEN" value=<%= @pr_code %> />
-                      <input name="submit" type="submit" value="購入（決済サイトへリンクします）" class="btn btn-danger" /></form>
-                    <% end %>
-                    <br/>
-
-
-<div class="a2a_kit a2a_kit_size_32 a2a_default_style">
-    <a class="a2a_button_facebook"></a>
-    <a class="a2a_button_twitter"></a>
-    <a class="a2a_button_google_plus"></a>
-    <a class="a2a_button_pinterest"></a>
-    <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
-</div>
-<script async src="https://static.addtoany.com/menu/page.js"></script>
-
-                  </div>
-              </div>
-          </div>
+<div class="card_detail">
+    <div class="card-body">
+      <div class="card_header">
+        <div class="card_image">
+          <%= image_tag @detail['ticket_image_url'], :size=>'80x80' %>
+        </div>
+        <div class="card_title"><%= @detail['title']['rendered'].html_safe %></div>
       </div>
+      <p class="cart_text">
+        <%= @detail['ticket_caption'] %><br/>
+      </p>
+      <dl class="card_shop">
+        <dt>使えるお店</dt>
+        <dd>
+          <ul class="yokonarabi">
+              <% @detail['shop_images'].each do |icon| %>
+              <li>
+                <%= image_tag icon, :size=>'40x40' %>
+              </li>
+              <% end %>
+          </ul>
+        </dd>
+      </dl>
+      <dl class="card_info">
+        <dt>有効期限</dt>
+        <dd><%= @detail['ticket_period'] %></dd>
+      </dl>
+      <dl class="card_info">
+        <dt>販売価格</dt>
+        <dd><%= @detail['ticket_price'] %></dd>
+      </dl>
+      <p class="notice"><%= @detail['ticket_billing'].html_safe %><p>
+
+      <% if @show_buy_button == true %>
+        <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
+      <% else %>
+        <form action="https://credit.j-payment.co.jp/gateway/payform.aspx" method="POST" target="_blank">
+        <input name="aid" type="HIDDEN" value="116389" />
+        <input name="pt" type="HIDDEN" value="1" />
+        <input name="jb" type="HIDDEN" value="CAPTURE" />
+        <input name="cod" type="HIDDEN" value=<%= @customer_id %> />
+        <input name="cmd" type="HIDDEN" value="2" />
+        <input name="iid" type="HIDDEN" value=<%= @pr_code %> />
+        <input name="customer_id" type="HIDDEN" value=<%= @customer_id %> />
+        <input name="em" type="HIDDEN" value=<%= @em %> />
+        <input name="pr_code" type="HIDDEN" value=<%= @pr_code %> />
+        <input name="submit" type="submit" value="購入（決済サイトへリンクします）" class="btn btn-danger" /></form>
+      <% end %>
+      <br/>
+
+
+  <div class="a2a_kit a2a_kit_size_32 a2a_default_style">
+      <a class="a2a_button_facebook"></a>
+      <a class="a2a_button_twitter"></a>
+      <a class="a2a_button_google_plus"></a>
+      <a class="a2a_button_pinterest"></a>
+      <a class="a2a_dd" href="https://www.addtoany.com/share"></a>
   </div>
-</div><!-- /.row -->
+  <script async src="https://static.addtoany.com/menu/page.js"></script>
+
+    </div>
+</div>

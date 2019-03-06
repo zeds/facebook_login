@@ -12,7 +12,11 @@ class PostsController < ApplicationController
       $pr_code = params['pr_code']
     end
 
+    @shop_images = params['shop_images']
+
     @detail = SlornApis.new.get_product_detail($id)
+
+    @detail['shop_images'] = params['shop_images']
 
     if @detail['ticket_billing'] == '都度課金'
       @detail['ticket_billing'] = '<div hidden></div>'

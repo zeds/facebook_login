@@ -33,7 +33,7 @@
             <dt>販売価格</dt>
             <dd><%= t['price'] %></dd>
           </dl>
-          <%= link_to "詳細", posts_show_path(:id => t['id'], :pr_code => t['pr_code']), :class => 'btn btn-primary' %>
+          <%= link_to "詳細", posts_show_path(:id => t['id'], :pr_code => t['pr_code'], :shop_images => t['shop_images']), :class => 'btn btn-primary' %>
         </div>
 
     <% end %>

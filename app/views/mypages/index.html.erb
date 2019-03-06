@@ -1,30 +1,50 @@
-
-<div align="center">
-  <p>id:<%= @customer_id %> name:<%= @name %></p>
+<h1 class="page_title">保有チケット一覧<br/>
+id:<%= @customer_id %> name:<%= @name %>
+</h1>
+<div class="ticket_qr">
   <p><%= qrcode_tag @code, module_size: 10 %></p>
+</div>
 
   <% if @tickets['status'] == 1 %>
-    <div class="container">
       <div class="row">
 
       <% @tickets['result'].each do |t| %>
-
-          <div class="card col-md-4" >
-            <div class="card" style="width: 18rem;">
-              <p><%= t['issuer_shop_name'] %></p>
-              <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
-              <div class="card-body">
-                <h5 class="card-title"><%= t['title'] %></h5>
-                <p class="card-text"><%= t['description'] %></p>
-                <p class="card-title">有効期間:<%= t['valid_date_from_dot'] %> - <%= t['valid_date_to_dot'] %></p>
-              </div>
-            </div>
+        <div class="card">
+          <p class="ticket_shop"><%= t['issuer_shop_name'] %></p>
+          <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
+          <h2 class="card-title"><%= t['title'] %></h2>
+          <p class="card-text"><%= t['description'] %></p>
+          <dl class="card_shop">
+            <dt>使えるお店</dt>
+            <dd>
+              <ul class="yokonarabi">
+                <% t['shops'].each do |shop_image| %>
+                  <li>
+                    <%= image_tag shop_image["shop_icon"], :size=>'40x40' %>
+                  </li>
+                <% end %>
+              </ul>
+            </dd>
+          </dl>
+          <div class="card_bottom">
+            <dl class="card_info">
+              <dt>枚数</dt>
+              <dd><%= t['gift_amount'] %><dd>
+            </dl>
+            <dl class="card_info">
+              <dt>有効期間</dt>
+              <dd><%= t['valid_date_from'] %> - <%= t['valid_date_to'] %><dd>
+            </dl>
+            <% if t['is_timecheck'] == 1 %>
+            <dl class="card_info">
+              <dt>利用可能時間</dt>
+              <dd><%= t['valid_time_from'] %> - <%= t['valid_time_to'] %><dd>
+            </dl>
+            <% end %>
           </div>
-
+        </div>
       <% end %>
-
       </div>
-    </div
   <% else %>
     <p>保有しているチケットはありません</p>
   <% end %>

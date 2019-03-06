@@ -4,6 +4,27 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_sign_up_params, only: [:create]
   # before_action :configure_account_update_params, only: [:update]
 
+  # def configure_account_update_params
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:name]) //追加した
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:description]) //追加した
+  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
+  # end
+
+
+  def password_edit
+  end
+
+  def password_update
+    debugger
+    customer_id = current_user["customer_id"]
+    current_password = params["user"]["current_password"]
+    
+    # "current_password"=>"", "password"=>"", "password_confirmation"=>""
+
+
+
+  end
+
   # GET /resource/sign_up
   def new
     super

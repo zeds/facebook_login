@@ -25,6 +25,13 @@ Rails.application.routes.draw do
     passwords: 'users/passwords',
     omniauth_callbacks: 'users/omniauth_callbacks' }
 
+
+  devise_scope :user do
+    get 'password_edit', to: 'users/registrations#password_edit', as: 'password_edit'
+    patch 'password_update', to: 'users/registrations#password_update', as: 'password_update'
+  end
+
+
   # 一部分だけ変えたい時、devise_scopeを使う
 
 
