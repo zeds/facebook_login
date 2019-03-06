@@ -13,7 +13,7 @@ id:<%= @customer_id %> name:<%= @name %>
           <p class="ticket_shop"><%= t['issuer_shop_name'] %></p>
           <img class="card-img-top" src="<%= t['image_url'] %>" alt="<%= t['issuer_shop_name'] %>">
           <h2 class="card-title"><%= t['title'] %></h2>
-          <p class="card-text"><%= t['description'] %></p>
+          <p class="card-text"><%= t['description'].html_safe %></p>
           <dl class="card_shop">
             <dt>使えるお店</dt>
             <dd>
