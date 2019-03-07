@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function() {
-  console.log("Banner download working!")
+  console.log("It works on each visit!")
 
   /* Banner */
       $('body').addClass('banner_on').on('click', '#button_close_banner', function() {
@@ -9,12 +9,12 @@ $(document).on('turbolinks:load', function() {
       if (agent.search(/iPhone/) !== -1 || agent.search(/iPad/) !== -1) {
 
         /* for iOS */
-        urlscheme = $('meta[property="slornuserapp://"]').attr('content');
+        urlscheme = $('meta[property="al:ios:url"]').attr('slornuserapp://');
         $('body').append('<div id="banner_app"><ul><li class="to_store"><a href="https://itunes.apple.com/jp/app/o-dena-kohi-kafe-jian-suo-slorn/id1103506104?mt=8" target="_blank">Slornアプリ無料ダウンロード</a></li><li class="open_app"><a href="' + urlscheme + '">アプリを開く</a></li></ul><a id="button_close_banner"><div id="button_close_banner_in"><span>閉じる</span></div></a></div>');
       } else if (agent.search(/Android/) !== -1) {
 
         /* for Android */
-        urlscheme = $('meta[property="al:android:url"]').attr('content');
+        urlscheme = $('meta[property="al:android:url"]').attr('slornuserapp://');
         $('body').append('<div id="banner_app"><ul><li class="to_store"><a href="https://play.google.com/store/apps/details?id=jp.tabletjapan.slorn.app.user" target="_blank">Slornアプリ無料ダウンロード</a></li><li class="open_app"><a href="' + urlscheme + '">アプリを開く</a></li></ul><a id="button_close_banner"><div id="button_close_banner_in"><span>閉じる</span></div></a></div>');
       } else {
 
