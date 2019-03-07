@@ -12,11 +12,15 @@ class PostsController < ApplicationController
       $pr_code = params['pr_code']
     end
 
-    @shop_images = params['shop_images']
+   @detail = SlornApis.new.get_product_detail($id)
 
-    @detail = SlornApis.new.get_product_detail($id)
-
-    @detail['shop_images'] = params['shop_images']
+    if params['shop_images'] != nil
+      @shop_images = params['shop_images']
+      $shop_images = @shop_images
+    else
+      #グローバル変数から取得
+      @shop_images = $shop_images
+    end
 
     if @detail['ticket_billing'] == '都度課金'
       @detail['ticket_billing'] = '<div hidden></div>'
