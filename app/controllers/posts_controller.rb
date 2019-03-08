@@ -12,12 +12,25 @@ class PostsController < ApplicationController
       $pr_code = params['pr_code']
     end
 
+    @phone_number = ''
+
+    if current_user
+      #電話番号を取得する
+      @result = SlornApis.new.find_email_web(current_user.email)
+      if @result['result']['phone_neumber'] != nil
+        @phone_number = @result['result']['phone_neumber']
+      end
+      debugger
+    end
+
    @detail = SlornApis.new.get_product_detail($id)
+
 
     if params['shop_images'] != nil
       @shop_images = params['shop_images']
       $shop_images = @shop_images
     else
+
       #グローバル変数から取得
       @shop_images = $shop_images
     end
@@ -40,7 +53,7 @@ class PostsController < ApplicationController
     @pt = "1"
     @jb = "CAPTURE"
     @cmd = "2"
-    @cod = customer_id
+    @cod = customer_id + "~" + $pr_code
     @customer_id = customer_id
     @iid = $pr_code
     @pr_code = $pr_code

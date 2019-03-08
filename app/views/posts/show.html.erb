@@ -35,15 +35,16 @@
         <%= link_to '購入', posts_create_path, :class => "btn btn-danger" %>
       <% else %>
         <form action="https://credit.j-payment.co.jp/gateway/payform.aspx" method="POST" target="_blank">
-        <input name="aid" type="HIDDEN" value="116389" />
-        <input name="pt" type="HIDDEN" value="1" />
-        <input name="jb" type="HIDDEN" value="CAPTURE" />
-        <input name="cod" type="HIDDEN" value=<%= @customer_id %> />
-        <input name="cmd" type="HIDDEN" value="2" />
-        <input name="iid" type="HIDDEN" value=<%= @pr_code %> />
-        <input name="customer_id" type="HIDDEN" value=<%= @customer_id %> />
-        <input name="em" type="HIDDEN" value=<%= @em %> />
-        <input name="pr_code" type="HIDDEN" value=<%= @pr_code %> />
+        pn:<input name="pn" type="HIDDENs" value="<%= @phone_number %>" /><br/>
+        aid:<input name="aid" type="HIDDENs" value="116389" /><br/>
+        pt:<input name="pt" type="HIDDENs" value="1" /><br/>
+        jb:<input name="jb" type="HIDDENs" value="CAPTURE" /><br/>
+        cod:<input name="cod" type="HIDDENs" value=<%= @cod %> /><br/>
+        cmd:<input name="cmd" type="HIDDENs" value="1" /><br/>
+        iid:<input name="iid" type="HIDDENs" value=<%= @pr_code %> /><br/>
+        customer_id:<input name="customer_id" type="HIDDENs" value="<%= @customer_id %>" /><br/>
+        em:<input name="em" type="HIDDENs" value=<%= @em %> /><br/>
+        pr_code<input name="pr_code" type="HIDDENs" value=<%= @pr_code %> /><br/>
         <input name="submit" type="submit" value="購入（決済サイトへリンクします）" class="btn btn-danger" /></form>
       <% end %>
       <br/>

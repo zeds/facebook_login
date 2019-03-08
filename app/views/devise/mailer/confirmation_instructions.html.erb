@@ -1,5 +1,16 @@
-<p><%= t('.greeting', recipient: @email) %></p>
+<p><%= t('.greeting', recipient: @resource.name) %></p>
 
-<p><%= t('.instruction') %></p>
+<p><%= t('.instruction_1') %></p>
+<p><%= t('.instruction_2') %></p>
 
-<p><%= link_to ('.action'), confirmation_url(@resource, confirmation_token: @token) %></p>
+<p><%= link_to t('.action'), confirmation_url(@resource, confirmation_token: @token) %></p>
+
+<p><%= t('.instruction_3') %></p>
+<p><%= t('.instruction_4') %></p>
+<p><%= t('.instruction_5') %></p>
+<p><%= t('.instruction_6') %></p>
+<p><%= t('.instruction_7') %></p>
+<p><%= t('.instruction_8') %></p>
+<p><%= t('.instruction_9') %></p>
+<p><%= t('.instruction_10') %></p>
+<p><%= t('.instruction_11') %></p>
