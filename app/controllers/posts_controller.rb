@@ -20,7 +20,6 @@ class PostsController < ApplicationController
       if @result['result']['phone_neumber'] != nil
         @phone_number = @result['result']['phone_neumber']
       end
-      debugger
     end
 
    @detail = SlornApis.new.get_product_detail($id)
