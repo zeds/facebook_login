@@ -33,10 +33,10 @@ Rails.application.configure do
     config.action_mailer.raise_delivery_errors = true
     config.action_mailer.delivery_method = :smtp
     config.action_mailer.smtp_settings = {
-      :address => "smtp.gmail.com",
+      :address => "sv934.xserver.jp",
       :port => 587,
-      :user_name => "tom.zed39@gmail.com",
-      :password => "mykhe3939",
+      :user_name => "no-reply@slorn.jp",
+      :password => "qlis2z0r",
       :authentication => :plain,
       :enable_starttls_auto => true
     }

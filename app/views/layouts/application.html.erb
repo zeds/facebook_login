@@ -25,11 +25,10 @@
           <form class="form-inline">
             <% if user_signed_in? %>
               <% if current_page?(mypages_index_path) %>
-                <!-- <strong><%= link_to "マイページ", mypages_index_path, :class => "btn btn-outline-primary" %></strong> -->
+                <%= link_to 'パスワード変更', password_edit_path, :class => "btn btn-outline-primary" %>
               <% else %>
                 <strong><%= link_to "マイページ", mypages_index_path, :class => "btn btn-outline-primary" %></strong>
               <% end %>
-              <%= link_to 'パスワード変更', password_edit_path, :class => "btn btn-outline-primary" %>
               <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, :class => "btn btn-danger" %>
             <% else %>
               <%= link_to 'ログイン', new_user_session_path, :class => "btn btn-danger" %>

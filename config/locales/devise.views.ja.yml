@@ -48,7 +48,7 @@ ja:
     mailer:
       confirmation_instructions:
         action: "メールアドレスの確認"
-        greeting: "%{recipient} 様"
+        greeting: "%{recipient} さん"
         instruction_1: "Slornへの登録ありがとうございます。"
         instruction_2: "以下のリンクをクリックし、メールアドレスの確認手続を完了させてください。"
         instruction_3: "このメールに見覚えが無い場合はお手数ですが、このメールに返信するのではなく"
@@ -66,12 +66,12 @@ ja:
         message:
         subject:
       password_change:
-        greeting: "%{recipient}様"
+        greeting: "%{recipient} さん"
         message: "パスワードが再設定されたことを通知します。"
         subject: "パスワードの変更について"
       reset_password_instructions:
         action: "パスワード再設定"
-        greeting: "%{recipient} 様"
+        greeting: "%{recipient} さん"
         instruction: "パスワード再設定の依頼を受けたため、メールを送信しています。下のリンクからパスワードの再設定ができます。"
         instruction_1: "Slornのご利用ありがとうございます。"
         instruction_2: "パスワード再設定の依頼を受けましたので、メールをお送りしています。"
@@ -90,7 +90,7 @@ ja:
         subject: "【Slorn】パスワード再設定のご案内"
       unlock_instructions:
         action: "アカウントのロック解除"
-        greeting: "%{recipient}様"
+        greeting: "%{recipient} さん"
         instruction: "アカウントのロックを解除するには下のリンクをクリックしてください。"
         message: "ログイン失敗が繰り返されたため、アカウントはロックされています。"
         subject: "アカウントの凍結解除について"

@@ -17,13 +17,12 @@ class PostsController < ApplicationController
     if current_user
       #電話番号を取得する
       @result = SlornApis.new.find_email_web(current_user.email)
-      if @result['result']['phone_neumber'] != nil
-        @phone_number = @result['result']['phone_neumber']
+      if @result['result']['phone_number'] != nil
+        @phone_number = @result['result']['phone_number']
       end
     end
 
    @detail = SlornApis.new.get_product_detail($id)
-
 
     if params['shop_images'] != nil
       @shop_images = params['shop_images']
