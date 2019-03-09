@@ -51,7 +51,7 @@ class PostsController < ApplicationController
     @pt = "1"
     @jb = "CAPTURE"
     @cmd = "2"
-    @cod = customer_id + "~" + $pr_code
+    @cod = customer_id + "x" + $pr_code
     @customer_id = customer_id
     @iid = $pr_code
     @pr_code = $pr_code

@@ -13,24 +13,24 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
     # uid,providerが存在するか確認している
     auth = request.env['omniauth.auth']
-    uid = auth.uid
-    provider = 'FB'
-    email = auth.info.email
-    name = auth.info.name
+    $uid = auth.uid
+    $provider = 'FB'
+    $email = auth.info.email
+    $name = auth.info.name
 
     # uid = '10155098615466460'
     # digest = Digest::MD5.hexdigest(uid)
 
     # @user = User.check_user_for_oauth(auth)
-    @result = SlornApis.new.find_provider_web(uid,'FB',email)
+    @result = SlornApis.new.find_provider_web($uid,'FB',$email)
 
     if @result['status'] == 1
       flash[:notice] = "お帰りなさい"
 
       my_sign_up_params = {}
-      my_sign_up_params["email"] = email
+      my_sign_up_params["email"] = $email
       my_sign_up_params["password"] = "sign_up_password"
-      my_sign_up_params["name"] = name
+      my_sign_up_params["name"] = $name
       # 重複チェックされているかわからないのだが、同じレコードが存在するとき上書きされている？
       self.resource = resource_class.new_with_session(my_sign_up_params, session)
       self.resource.skip_confirmation!
@@ -38,7 +38,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       #passwordを再送するには、Slorn WEBにUserレコードが必要
       #customer_idを追加する
-      @user = User.find_by(email: email)
+      @user = User.find_by(email: $email)
       @user.customer_id = @result['result']['id']
       @user.save
       sign_in(@user, scope: :user)
@@ -46,7 +46,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       redirect_to mypages_index_path
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"
-      redirect_to names_index_path
+      redirect_to names_index_path(uid: $uid, email: $email)
     end
 
   end
