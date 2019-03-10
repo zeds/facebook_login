@@ -43,7 +43,12 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       @user.save
       sign_in(@user, scope: :user)
 
-      redirect_to mypages_index_path
+      if session[:user_return_to] != nil
+        redirect_to session[:user_return_to]
+      else
+        redirect_to mypages_index_path
+      end
+      
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"
       redirect_to names_index_path(uid: $uid, email: $email)

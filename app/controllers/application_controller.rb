@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   add_flash_types :success, :info, :warning, :danger
   before_action   :configure_permitted_parameters, if: :devise_controller?
-  before_action   :store_current_location
+  before_action   :store_current_location, unless: :devise_controller?
 
   #登録完了後のリダイレクト先の変更
   def after_sign_in_path_for(resource_or_scope)
