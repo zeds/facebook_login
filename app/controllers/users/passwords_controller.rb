@@ -32,9 +32,6 @@ class Users::PasswordsController < Devise::PasswordsController
       @user.customer_id = @result['result']['id']
       @user.save
 
-      # customer_id = @result['result']['id']
-      # @user = User.create_email_user(email,customer_id)
-
       self.resource = resource_class.send_reset_password_instructions(resource_params)
       yield resource if block_given?
 

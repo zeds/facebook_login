@@ -15,7 +15,7 @@
           <ul class="yokonarabi">
               <% @shop_images.each do |icon| %>
               <li>
-                <%= image_tag icon, :size=>'40x40' %>
+                <%= image_tag icon, {:style => "width:60px"} %>
               </li>
               <% end %>
           </ul>

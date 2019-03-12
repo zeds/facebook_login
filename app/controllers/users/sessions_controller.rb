@@ -16,7 +16,6 @@ class Users::SessionsController < Devise::SessionsController
     password = sign_in_params['password']
     remember_me = sign_in_params['remember_me']
 
-    # @result = SlornApis.new.login_email_web("maedamin+20190130@gmail.com","hogehoge")
     @result = SlornApis.new.login_email_web(email,password)
 
     # emailが存在しない。
@@ -31,13 +30,13 @@ class Users::SessionsController < Devise::SessionsController
     $name = @result['result']['name']
 
     user = User.find_by(email: $email)
-    if user == nil
-      # Slorn WEBにレコードを作成する
-      user = User.create_email_user($email, $customer_id)
+
+    if user != nil
+      user.destroy
     end
 
-    user.customer_id = $customer_id
-    user.save
+    # Slorn WEBにレコードを作成する
+    user = User.create_email_user($email, $customer_id, $name, password)
 
     sign_in(user, scope: :user)
 

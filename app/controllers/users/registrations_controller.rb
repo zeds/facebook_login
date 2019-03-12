@@ -30,6 +30,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @user = User.find_by_id(current_user.id)
         current_digest = Digest::MD5.hexdigest(current_password)
 
+
         if @user.encrypted_password != current_digest
           flash[:notice] = "現在のパスワードが正しくありません"
         else
@@ -41,7 +42,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
             flash[:notice] = "error : update_customer_web"
           else
             # d487
-            flash[:notice] = "パスワードを更新しました"
+            if password != password_confirmation
+              flash[:notice] = "確認パスワードが一致しません"
+            else
+              @user.encrypted_password = digest
+              @user.save
+              flash[:notice] = "パスワードを更新しました"
+            end
           end
         end
       end

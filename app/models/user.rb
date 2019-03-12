@@ -11,13 +11,15 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
   end
 
-  def self.create_email_user(email,customer_id)
+  def self.create_email_user(email,customer_id,name,password)
+
     user = User.create(
       uid:      nil,
       provider: nil,
       email:    email,
-      name:  "hogehoge",
-      password: Devise.friendly_token[0, 20],
+      name:  name,
+      password: password,
+      encrypted_password: Digest::MD5.hexdigest(password),
       image:  nil,
       confirmed_at: Time.now.utc,
       customer_id: customer_id

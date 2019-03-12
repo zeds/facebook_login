@@ -18,9 +18,6 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     $email = auth.info.email
     $name = auth.info.name
 
-    # uid = '10155098615466460'
-    # digest = Digest::MD5.hexdigest(uid)
-
     # @user = User.check_user_for_oauth(auth)
     @result = SlornApis.new.find_provider_web($uid,'FB',$email)
 
@@ -48,7 +45,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       else
         redirect_to mypages_index_path
       end
-      
+
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"
       redirect_to names_index_path(uid: $uid, email: $email)
