@@ -3,6 +3,7 @@ id:<%= @customer_id %> お名前:<%= @name %>
 </h1>
 <div class="ticket_qr">
   <p><%= qrcode_tag @code, module_size: 10 %></p>
+  チケットをご利用の際は、この画面を店員さんに見せてください。
 </div>
 
   <% if @tickets['status'] == 1 %>
