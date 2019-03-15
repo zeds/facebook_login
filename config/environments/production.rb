@@ -35,7 +35,7 @@ Rails.application.configure do
     config.action_mailer.smtp_settings = {
       :address => "sv934.xserver.jp",
       :port => 587,
-      :user_name => "Slorn <no-reply@slorn.jp>",
+      :user_name => "no-reply@slorn.jp",
       :password => "qlis2z0r",
       :authentication => :plain,
       :enable_starttls_auto => true
