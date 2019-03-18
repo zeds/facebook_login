@@ -20,8 +20,6 @@ class NamesController < ApplicationController
 
     @result = SlornApis.new.register_customer_web($email, $password, $name, $uid, "FB")
 
-    debugger
-
     # 成功
     if @result["status"] == 1
       #passwordを再送するには、Slorn WEBにUserレコードが必要

@@ -121,8 +121,6 @@ class SlornApis
     uri = Addressable::URI.parse(url)
     uri.port = 443
 
-    debugger
-
     json = call_http(uri)
     Rails.logger.error(json)
 
