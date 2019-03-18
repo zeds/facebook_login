@@ -21,8 +21,8 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     # @user = User.check_user_for_oauth(auth)
     @result = SlornApis.new.find_provider_web($uid,'FB',$email)
 
-    console.log("=== find_provider_web ===")
-    console.log(@result)
+    Rails.logger.error("=== find_provider_web ===")
+    Rails.logger.error(@result)
 
     if @result['status'] == 1
 
