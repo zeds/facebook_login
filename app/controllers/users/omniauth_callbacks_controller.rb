@@ -22,29 +22,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @result = SlornApis.new.find_provider_web($uid,'FB',$email)
 
     if @result['status'] == 1
+
+      $customer_id = @result["result"]["id"]
+      $name = @result["result"]["name"]
+
       flash[:notice] = "お帰りなさい"
 
-      my_sign_up_params = {}
-      my_sign_up_params["email"] = $email
-      my_sign_up_params["password"] = "sign_up_password"
-      my_sign_up_params["name"] = $name
-      # 重複チェックされているかわからないのだが、同じレコードが存在するとき上書きされている？
-      self.resource = resource_class.new_with_session(my_sign_up_params, session)
-      self.resource.skip_confirmation!
-      self.resource.save
-
-      #passwordを再送するには、Slorn WEBにUserレコードが必要
-      #customer_idを追加する
-      @user = User.find_by(email: $email)
-      @user.customer_id = @result['result']['id']
-      @user.save
+      #エラー処理していない
+      @user = User.sign_in_with_facebook($email,$customer_id,$name)
       sign_in(@user, scope: :user)
-
-      if session[:user_return_to] != nil
-        redirect_to session[:user_return_to]
-      else
-        redirect_to mypages_index_path
-      end
+      redirect_to mypages_index_path
 
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"

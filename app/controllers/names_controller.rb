@@ -35,18 +35,7 @@ class NamesController < ApplicationController
 
       $customer_id = @result["result"]
 
-      # Slorn-webにレコードを作成する
-      @user = User.create(
-        uid:      nil,
-        provider: 'FB',
-        email:    $email,
-        name:     $name,
-        password: $password,
-        encrypted_password: Digest::MD5.hexdigest($password),
-        image:  nil,
-        confirmed_at: Time.now.utc,
-        customer_id: $customer_id
-      ) # User.createはsaveまでやってくれる
+      @user = User.sign_in_with_facebook($email,$customer_id,$name)
       sign_in(@user, scope: :user)
 
       flash[:notice] = "Slornへようこそ"

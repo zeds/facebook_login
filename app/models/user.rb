@@ -11,6 +11,30 @@ class User < ApplicationRecord
     user = User.where(uid: auth.uid, provider: auth.provider).first
   end
 
+  def self.sign_in_with_facebook(email,customer_id,name)
+
+    user = User.find_by(email: email)
+
+    #存在する場合は削除する
+    if user != nil
+      user.destroy
+    end
+
+    # Slorn-webにレコードを作成する
+    @user = User.create(
+      uid:      nil,
+      provider: 'FB',
+      email:    email,
+      name:     name,
+      password: "hogehoge",
+      encrypted_password: Digest::MD5.hexdigest("hogehoge"),
+      image:  nil,
+      confirmed_at: Time.now.utc,
+      customer_id: customer_id
+    ) # User.createはsaveまでやってくれる
+
+  end
+
   def self.create_email_user(email,customer_id,name,password)
 
     user = User.create(
