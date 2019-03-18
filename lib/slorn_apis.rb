@@ -116,9 +116,12 @@ class SlornApis
     raise ArgumentError, 'too many HTTP redirects' if retry_count == 0
 
     email = url_encode(email)
+    name = url_encode(name)
     url = "https://staging-c-api.slorn.jp/v2.0.1/register_customer_web?email=#{email}&password=#{password}&name=#{name}&uid=#{uid}&provider=#{provider}"
     uri = Addressable::URI.parse(url)
     uri.port = 443
+
+    debugger
 
     json = call_http(uri)
     Rails.logger.error(json)
