@@ -5,9 +5,6 @@ class PostsController < ApplicationController
   def show
 
 
-    set_meta_tags ({title: 'タイトル',
-            description: 'デスクリプション',
-            og: {image: {_: 'https://s3-ap-northeast-1.amazonaws.com/test-s3.slorn.jp/pub/gift/origin/IS8yQPl6/384x384.jpg', width: 1200, height: 630}}});
 
     if params['id'] != nil
       $post_id = params['id']
@@ -28,6 +25,16 @@ class PostsController < ApplicationController
     end
 
    @detail = SlornApis.new.get_product_detail($post_id)
+
+
+   set_meta_tags ({title: @detail['title'],
+           description: @detail['ticket_caption'],
+           og: {title: @detail['title']['rendered'],
+                type: 'website',
+                description: @detail['ticket_caption'],
+                site_name: 'Slorn WEB',
+                image: {_: @detail['ticket_image_url'], width: 400, height: 400}}});
+
 
    @shops = SlornApis.new.get_shops_web($post_id)
    @shop_images = []
