@@ -18,6 +18,10 @@ gem 'simple_form'
 gem 'devise-i18n'
 gem 'font-awesome-rails'
 
+#meta tag
+gem 'meta-tags'
+
+
 gem 'rqrcode'
 gem 'rqrcode_png'
 gem 'chunky_png'

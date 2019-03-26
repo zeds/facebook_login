@@ -51,6 +51,18 @@ class SlornApis
 
   end
 
+  def get_shops_web(post_id)
+    url = "https://staging-c-api.slorn.jp/v2.0.1/get_shops_web?post_id=#{post_id}"
+    uri = Addressable::URI.parse(url)
+    uri.port = 443
+
+    json = call_http(uri)
+    Rails.logger.error(json)
+
+    return json
+  end
+
+
   def get_available_products
     url = "https://staging-c-api.slorn.jp/v2.0.1/get_available_products"
     uri = Addressable::URI.parse(url)
