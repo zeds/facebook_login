@@ -70,8 +70,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     password = sign_up_params['password']
     name = sign_up_params['name']
 
-    # @result = SlornApis.new.login_email_web("maedamin+20190130@gmail.com","hogehoge")
-    @result = SlornApis.new.find_email_web(email,password)
+    @result = SlornApis.new.find_email_web(email)
 
     if @result["status"] == 1
       flash[:notice] = "emailアドレスは既に登録されています。ログインしてください。"

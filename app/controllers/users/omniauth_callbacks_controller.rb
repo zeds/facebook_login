@@ -34,7 +34,13 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       #エラー処理していない
       @user = User.sign_in_with_facebook($email,$customer_id,$name)
       sign_in(@user, scope: :user)
-      redirect_to mypages_index_path
+
+      # 詳細から来た時は、post_idのページを開く
+      if $post_id != nil
+        redirect_to posts_show_path(id: $post_id)
+      else
+        redirect_to mypages_index_path
+      end
 
     else
       flash[:notice] = "ご新規のお客様ですね。店員さんに何と呼ばれたいですか？ *1文字以上"

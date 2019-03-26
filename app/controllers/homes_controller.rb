@@ -2,9 +2,9 @@ class HomesController < ApplicationController
   def index
 
 
-    $id = nil;
+    $post_id = nil;
 
-    
+
     session.delete(:user_return_to)
 
     @result = SlornApis.new.get_available_products

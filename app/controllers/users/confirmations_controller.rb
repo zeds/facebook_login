@@ -47,7 +47,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       if post_id != nil
         redirect_to posts_show_path(id: post_id)
       else
-        redirect_to root_path
+        redirect_to mypages_index_path
       end
     else
       flash[:notice] = "register_customer_webでエラーが発生しました"

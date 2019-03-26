@@ -5,7 +5,7 @@ class PostsController < ApplicationController
   def show
 
     if params['id'] != nil
-      $id = params['id']
+      $post_id = params['id']
     end
 
     if params['pr_code'] != nil
@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       end
     end
 
-   @detail = SlornApis.new.get_product_detail($id)
+   @detail = SlornApis.new.get_product_detail($post_id)
 
     if params['shop_images'] != nil
       @shop_images = params['shop_images']

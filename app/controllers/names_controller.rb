@@ -37,7 +37,13 @@ class NamesController < ApplicationController
       sign_in(@user, scope: :user)
 
       flash[:notice] = "Slornへようこそ"
-      redirect_to mypages_index_path
+
+      if $post_id != nil
+        redirect_to posts_show_path(id: $post_id)
+      else
+        redirect_to mypages_index_path
+      end
+      
     else
       flash[:notice] = "ERROR : register_customer_web"
       redirect_to new_user_session_path and return

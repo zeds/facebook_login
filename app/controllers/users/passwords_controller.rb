@@ -55,6 +55,16 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # GET /resource/password/edit?reset_password_token=abcdef
   def edit
+
+    # post_idが設定されていたら、$post_idに格納する
+    post_id = params['post_id'];
+
+    if post_id != nil
+      $post_id = post_id
+    else
+      $post_id = nil
+    end
+
     super
   end
 
@@ -82,15 +92,21 @@ class Users::PasswordsController < Devise::PasswordsController
           redirect_to new_user_password_path
         end
 
-
         flash_message = resource.active_for_authentication? ? :updated : :updated_not_active
         set_flash_message!(:notice, flash_message)
         resource.after_database_authentication
+
         sign_in(resource_name, resource)
       else
         set_flash_message!(:notice, :updated_not_active)
       end
-      respond_with resource, location: after_resetting_password_path_for(resource)
+
+      # 詳細から来た時は、post_idのページを開く
+      if $post_id != nil
+        redirect_to posts_show_path(id: $post_id)
+      else
+        respond_with resource, location: after_resetting_password_path_for(resource)
+      end
     else
       set_minimum_password_length
       respond_with resource
