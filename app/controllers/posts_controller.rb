@@ -35,8 +35,6 @@ class PostsController < ApplicationController
    @html = @detail['metadata']['ticket_caption']
    @html_strip = Sanitize.clean(@html, tags:[])
 
-   @html_strip = "なんでやろー"
-
    set_meta_tags ({title: @detail['title'],
            description: @detail['ticket_caption'],
            og: {title: @detail['title']['rendered'],
