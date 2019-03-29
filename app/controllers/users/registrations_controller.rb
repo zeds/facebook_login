@@ -77,12 +77,16 @@ class Users::RegistrationsController < Devise::RegistrationsController
       redirect_to new_user_session_path and return
     end
 
+    user = User.find_by(email: email)
+    if user != nil
+      user.destroy
+    end
+
     my_sign_up_params = {}
     my_sign_up_params["email"] = email
     my_sign_up_params["password"] = password
     my_sign_up_params["name"] = name
     my_sign_up_params["post_id"] = session[:post_id]
-
 
     build_resource(my_sign_up_params)
 
