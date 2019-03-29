@@ -45,7 +45,6 @@ class SlornApis
     uri = Addressable::URI.parse(url)
 
     json = call_http_wordpress(uri)
-    Rails.logger.error(json)
 
     return json
 
@@ -57,7 +56,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -69,7 +67,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -79,7 +76,6 @@ class SlornApis
     uri = Addressable::URI.parse(url)
 
     json = call_http_wordpress(uri)
-    Rails.logger.error(json)
 
     return json
 
@@ -92,7 +88,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
 
@@ -106,7 +101,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -119,7 +113,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -134,7 +127,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -148,7 +140,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -162,7 +153,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
 
@@ -185,7 +175,6 @@ class SlornApis
     uri.port = 443
 
     json = call_http(uri)
-    Rails.logger.error(json)
 
     return json
   end
@@ -211,13 +200,11 @@ class SlornApis
           end
         when Net::HTTPRedirection
           location = response['location']
-          Rails.logger.error(warn "redirected to #{location}")
         else
           # Rails.logger.error([uri.to_s, response.value].join(" : "))
           Rails.logger.error("見つかりませんでした！")
       end
     rescue => e
-      Rails.logger.error(e.message)
       raise e
     end
   end

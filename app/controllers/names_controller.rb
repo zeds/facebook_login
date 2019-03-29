@@ -38,12 +38,12 @@ class NamesController < ApplicationController
 
       flash[:notice] = "Slornへようこそ"
 
-      if $post_id != nil
-        redirect_to posts_show_path(id: $post_id)
+      if session[:post_id] != ""
+        redirect_to posts_show_path(id: session[:post_id])
       else
         redirect_to mypages_index_path
       end
-      
+
     else
       flash[:notice] = "ERROR : register_customer_web"
       redirect_to new_user_session_path and return

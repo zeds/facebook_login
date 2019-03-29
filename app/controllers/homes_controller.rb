@@ -1,8 +1,9 @@
 class HomesController < ApplicationController
   def index
 
-
-    $post_id = nil;
+    session[:post_id] = ""
+    Rails.logger.error("********************")
+    Rails.logger.error("HOME $post_id=" + session[:post_id])
 
 
     session.delete(:user_return_to)

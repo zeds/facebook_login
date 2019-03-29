@@ -4,10 +4,10 @@ class PostsController < ApplicationController
 
   def show
 
-
-
     if params['id'] != nil
-      $post_id = params['id']
+      session[:post_id] = params['id']
+    else
+      session[:post_id] = ""
     end
 
     if params['pr_code'] != nil
@@ -15,6 +15,11 @@ class PostsController < ApplicationController
     end
 
     @phone_number = ''
+
+
+    Rails.logger.error("********************")
+    Rails.logger.error("POST $post_id=" + session[:post_id])
+
 
     if current_user
       #電話番号を取得する
@@ -24,19 +29,20 @@ class PostsController < ApplicationController
       end
     end
 
-   @detail = SlornApis.new.get_product_detail($post_id)
+   @detail = SlornApis.new.get_product_detail(session[:post_id])
 
+   @html = @detail['metadata']['ticket_caption']
 
    set_meta_tags ({title: @detail['title'],
            description: @detail['ticket_caption'],
            og: {title: @detail['title']['rendered'],
                 type: 'website',
-                description: @detail['ticket_caption'],
+                description: @html,
                 site_name: 'Slorn WEB',
                 image: {_: @detail['ticket_image_url'], width: 400, height: 400}}});
 
 
-   @shops = SlornApis.new.get_shops_web($post_id)
+   @shops = SlornApis.new.get_shops_web(session[:post_id])
    @shop_images = []
    for shops in @shops['result'] do
      @shop_images.push("https://s3-ap-northeast-1.amazonaws.com/test-s3.slorn.jp/pub/shoplogo/origin/" + shops["icon"] + "/200x200.jpg")

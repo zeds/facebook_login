@@ -8,7 +8,33 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # POST /resource/confirmation
   def create
-    super
+
+    email = resource_params["email"]
+
+    #追加
+    my_resource_params = {}
+    my_resource_params["email"] = email
+    my_resource_params["post_id"] = session[:post_id]
+    self.resource = resource_class.new_with_session(my_resource_params, session)
+    self.resource.skip_confirmation!
+    self.resource.save
+
+    user = User.find_by(email: email)
+    user.post_id = session[:post_id]
+    user.save
+
+
+    self.resource = resource_class.send_confirmation_instructions(resource_params)
+    yield resource if block_given?
+
+
+    if successfully_sent?(resource)
+      respond_with({}, location: after_resending_confirmation_instructions_path_for(resource_name))
+    else
+      respond_with(resource)
+    end
+
+    # super
   end
 
   # GET /resource/confirmation?confirmation_token=abcdef
@@ -67,4 +93,9 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # def after_confirmation_path_for(resource_name, resource)
   #   super(resource_name, resource)
   # end
+  def resource_params
+    params.require(:user).permit(:email, :password, :password_confirmation, :reset_password_token, :post_id)
+  end
+  private :resource_params
+
 end
