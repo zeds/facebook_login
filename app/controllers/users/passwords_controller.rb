@@ -56,6 +56,7 @@ class Users::PasswordsController < Devise::PasswordsController
         end
       else
         respond_with(resource)
+        
       end
 
       # emailがSlorn DBにあって、Slorn WEBにない場合、レコードを作成してしまう。
