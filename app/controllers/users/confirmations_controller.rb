@@ -14,12 +14,19 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
     #追加
     my_resource_params = {}
     my_resource_params["email"] = email
+    my_resource_params["password"] = nil
+    my_resource_params["name"] = nil
     my_resource_params["post_id"] = session[:post_id]
     self.resource = resource_class.new_with_session(my_resource_params, session)
     self.resource.skip_confirmation!
     self.resource.save
 
     user = User.find_by(email: email)
+    if user == nil
+      flash[:notice] = "emailが存在しません"
+      redirect_to new_user_confirmation_path and return
+    end
+
     user.post_id = session[:post_id]
     user.save
 

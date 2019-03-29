@@ -20,6 +20,7 @@ gem 'font-awesome-rails'
 
 #meta tag
 gem 'meta-tags'
+gem 'sanitize'
 
 
 gem 'rqrcode'

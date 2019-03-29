@@ -4,14 +4,15 @@ class PostsController < ApplicationController
 
   def show
 
+    #はじめは、パラメータにid,pr_codeがある。
+    #購入ボタンを押した時には、id,pr_codeがない。
+
     if params['id'] != nil
       session[:post_id] = params['id']
-    else
-      session[:post_id] = ""
     end
 
     if params['pr_code'] != nil
-      $pr_code = params['pr_code']
+      session[:pr_code] = params['pr_code']
     end
 
     @phone_number = ''
@@ -32,12 +33,13 @@ class PostsController < ApplicationController
    @detail = SlornApis.new.get_product_detail(session[:post_id])
 
    @html = @detail['metadata']['ticket_caption']
+   @html_strip = Sanitize.clean(@html, tags:[])
 
    set_meta_tags ({title: @detail['title'],
            description: @detail['ticket_caption'],
            og: {title: @detail['title']['rendered'],
                 type: 'website',
-                description: @html,
+                description: @html_strip,
                 site_name: 'Slorn WEB',
                 image: {_: @detail['ticket_image_url'], width: 400, height: 400}}});
 
@@ -74,10 +76,10 @@ class PostsController < ApplicationController
     @pt = "1"
     @jb = "CAPTURE"
     @cmd = "2"
-    @cod = customer_id + "x" + $pr_code
+    @cod = customer_id + "x" + session[:pr_code]
     @customer_id = customer_id
-    @iid = $pr_code
-    @pr_code = $pr_code
+    @iid = session[:pr_code]
+    @pr_code = session[:pr_code]
     @em = email
 
     if user_signed_in?
