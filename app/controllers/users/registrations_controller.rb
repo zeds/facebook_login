@@ -72,7 +72,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     @result = SlornApis.new.find_email_web(email)
 
-    binding.pry
 
     if @result["status"] == 1
       flash[:notice] = "emailアドレスは既に登録されています。ログインしてください。"
