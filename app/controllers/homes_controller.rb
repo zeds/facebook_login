@@ -21,12 +21,11 @@ class HomesController < ApplicationController
        @detail = SlornApis.new.get_product_detail(post_id)
        @hash = {}
 
-
        #wordpressはエラーの時trueを返す
        if @detail == true
          # nothing to be done
        else
-         @hash["id"] = @detail["id"]
+         @hash["post_id"] = @detail["id"]
          @hash["pr_code"] = pr_code
          @hash["title"] = @detail["title"]
 

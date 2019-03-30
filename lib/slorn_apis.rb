@@ -5,6 +5,8 @@ include ERB::Util
 
 class SlornApis
 
+
+
   def post_robot_payment(customer_id, email)
     url = "https://credit.j-payment.co.jp/gateway/payform.aspx"
     uri = Addressable::URI.parse(url)
@@ -39,6 +41,16 @@ class SlornApis
     response.body # response body
 
   end
+
+
+  def get_payment_info(post_id)
+    url = "https://staging-c-api.slorn.jp/v2.0.1/get_payment_info?post_id=#{post_id}"
+    uri = Addressable::URI.parse(url)
+    json = call_http_wordpress(uri)
+
+    return json
+  end
+
 
   def get_product_detail(post_id)
     url = "https://slorn.jp/wp-json/wp/v2/ticket/#{post_id}"

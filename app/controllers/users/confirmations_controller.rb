@@ -77,7 +77,7 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
       flash[:notice] = "Slornへの登録が完了しました"
 
       # 詳細から来た時は、post_idのページを開く
-      if post_id != nil
+      if post_id.present?
         redirect_to posts_show_path(id: post_id)
       else
         redirect_to mypages_index_path

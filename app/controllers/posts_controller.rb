@@ -7,19 +7,24 @@ class PostsController < ApplicationController
     #はじめは、パラメータにid,pr_codeがある。
     #購入ボタンを押した時には、id,pr_codeがない。
 
-    if params['id'] != nil
-      session[:post_id] = params['id']
-    end
+    if params[:post_id].present?
+      session[:post_id] = params[:post_id]
+      @payment = SlornApis.new.get_payment_info(session[:post_id])
 
-    if params['pr_code'] != nil
-      session[:pr_code] = params['pr_code']
+#{"status"=>1, "result"=>{
+# "pr_code"=>"123",
+# "aid"=>115406,
+# "jb"=>"CAPTURE",
+# "pt"=>1,
+# "cmd"=>1}, "code"=>"1001", "message"=>"lang::pr code was found."}
+      session[:pr_code] = @payment['result']['pr_code']
+      session[:aid] = @payment['result']['aid']
+      session[:jb] = @payment['result']['jb']
+      session[:pt] = @payment['result']['pt']
+      session[:cmd] = @payment['result']['cmd']
     end
 
     @phone_number = ''
-
-
-    Rails.logger.error("********************")
-    Rails.logger.error("POST $post_id=" + session[:post_id])
 
 
     if current_user
@@ -72,15 +77,20 @@ class PostsController < ApplicationController
       email = current_user.email
     end
 
-    @aid = "116389"
-    @pt = "1"
-    @jb = "CAPTURE"
-    @cmd = "2"
     @cod = customer_id + "x" + session[:pr_code]
     @customer_id = customer_id
-    @iid = session[:pr_code]
-    @pr_code = session[:pr_code]
     @em = email
+
+
+    # @aid = "116389"
+    # @pt = "1"
+    # @jb = "CAPTURE"
+    # @cmd = "2"
+    # @cod = customer_id + "x" + session[:pr_code]
+    # @customer_id = customer_id
+    # @iid = session[:pr_code]
+    # @pr_code = session[:pr_code]
+    # @em = email
 
     if user_signed_in?
       # ログインしている時は、購入ボタンを消し、postのボタンを表示する
