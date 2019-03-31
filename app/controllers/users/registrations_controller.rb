@@ -30,7 +30,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
         @user = User.find_by_id(current_user.id)
         current_digest = Digest::MD5.hexdigest(current_password)
 
-
         if @user.encrypted_password != current_digest
           flash[:notice] = "現在のパスワードが正しくありません"
         else

@@ -36,7 +36,8 @@ class Users::SessionsController < Devise::SessionsController
     end
 
     # Slorn WEBにレコードを作成する
-    user = User.create_email_user($email, $customer_id, $name, password)
+    encrypted_password = Digest::MD5.hexdigest(password)
+    user = User.create_email_user($email, $customer_id, $name, encrypted_password)
 
     sign_in(user, scope: :user)
 

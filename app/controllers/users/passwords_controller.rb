@@ -37,7 +37,7 @@ class Users::PasswordsController < Devise::PasswordsController
       # Slorn WEBにレコードを作成する
       customer_id = @result['result']['id']
       name = @result["result"]["name"]
-      user = User.create_email_user(email, customer_id, name, "sign_up_password")
+      user = User.create_email_user(email, customer_id, name, "999999999")
       # user.post_id を設定しないと、reset_password_instructionの@resource.post_idが
       # 取得できなかった。
       user.post_id = session[:post_id]
@@ -56,7 +56,7 @@ class Users::PasswordsController < Devise::PasswordsController
         end
       else
         respond_with(resource)
-        
+
       end
 
       # emailがSlorn DBにあって、Slorn WEBにない場合、レコードを作成してしまう。
@@ -82,6 +82,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
   # PUT /resource/password
   def update
+
     self.resource = resource_class.reset_password_by_token(resource_params)
 
     yield resource if block_given?

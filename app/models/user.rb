@@ -35,15 +35,15 @@ class User < ApplicationRecord
 
   end
 
-  def self.create_email_user(email,customer_id,name,password)
+  def self.create_email_user(email, customer_id, name, encrypted_password)
 
     user = User.create(
       uid:      nil,
       provider: nil,
       email:    email,
       name:  name,
-      password: password,
-      encrypted_password: Digest::MD5.hexdigest(password),
+      password: "yellow",
+      encrypted_password: encrypted_password,
       image:  nil,
       confirmed_at: Time.now.utc,
       customer_id: customer_id

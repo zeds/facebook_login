@@ -4,6 +4,7 @@ class HomesController < ApplicationController
     session[:post_id] = ""
     Rails.logger.error("********************")
     Rails.logger.error("HOME $post_id=" + session[:post_id])
+    Rails.logger.error("********************")
 
 
     session.delete(:user_return_to)

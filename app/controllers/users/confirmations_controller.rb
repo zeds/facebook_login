@@ -8,8 +8,13 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
   # POST /resource/confirmation
   def create
+    Rails.logger.info("** confirmation create **")
+
+
 
     email = resource_params["email"]
+
+    binding.pry
 
     #追加
     my_resource_params = {}
@@ -47,21 +52,20 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # GET /resource/confirmation?confirmation_token=abcdef
   def show
 
-    post_id = params['post_id'];
+    Rails.logger.info("** confirmation show **")
 
     self.resource = resource_class.confirm_by_token(params[:confirmation_token])
 
     email = self.resource.email
-    password = self.resource.encrypted_password
+    encrypted_password = self.resource.encrypted_password
     name = self.resource.name
     uid = nil
     provider = nil
 
-    @result = SlornApis.new.register_customer_web(email, password, name, uid, provider)
+    @result = SlornApis.new.register_customer_web(email, encrypted_password, name, uid, provider)
 
     # 成功
     if @result["status"] == 1
-
 
       # ログイン状態にする
       customer_id = @result['result'];
@@ -71,14 +75,15 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
         user.destroy
       end
 
-      user = User.create_email_user(email, customer_id, name, password)
+      user = User.create_email_user(email, customer_id, name, encrypted_password)
       sign_in(user, scope: :user)
 
       flash[:notice] = "Slornへの登録が完了しました"
 
       # 詳細から来た時は、post_idのページを開く
-      if post_id.present?
-        redirect_to posts_show_path(id: post_id)
+      if params[:post_id].present?
+        session[:post_id] = params[:post_id]
+        redirect_to posts_show_path(post_id: session[:post_id])
       else
         redirect_to mypages_index_path
       end

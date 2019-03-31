@@ -4,12 +4,20 @@ class PostsController < ApplicationController
 
   def show
 
-    #はじめは、パラメータにid,pr_codeがある。
-    #購入ボタンを押した時には、id,pr_codeがない。
+    #はじめは、params[:post_id]がある
+    #購入ボタンを押した時には、params[:post_id]がない
+
+    #confirmからきた時は、session[:post_id]
+
+    Rails.logger.info("*** posts/show***********")
+
 
     if params[:post_id].present?
       session[:post_id] = params[:post_id]
-      @payment = SlornApis.new.get_payment_info(session[:post_id])
+    end
+
+  Rails.logger.info("session[:post_id]="+session[:post_id])
+  @payment = SlornApis.new.get_payment_info(session[:post_id])
 
 #{"status"=>1, "result"=>{
 # "pr_code"=>"123",
@@ -17,12 +25,20 @@ class PostsController < ApplicationController
 # "jb"=>"CAPTURE",
 # "pt"=>1,
 # "cmd"=>1}, "code"=>"1001", "message"=>"lang::pr code was found."}
-      session[:pr_code] = @payment['result']['pr_code']
-      session[:aid] = @payment['result']['aid']
-      session[:jb] = @payment['result']['jb']
-      session[:pt] = @payment['result']['pt']
-      session[:cmd] = @payment['result']['cmd']
-    end
+    session[:pr_code] = @payment['result']['pr_code']
+    session[:aid] = @payment['result']['aid']
+    session[:jb] = @payment['result']['jb']
+    session[:pt] = @payment['result']['pt']
+    session[:cmd] = @payment['result']['cmd']
+
+
+    @detail = SlornApis.new.get_product_detail(session[:post_id])
+
+
+    Rails.logger.info("**************")
+    Rails.logger.info("ticket_caption" + @detail['ticket_caption'])
+
+    @html = @detail['ticket_caption']
 
     @phone_number = ''
 
