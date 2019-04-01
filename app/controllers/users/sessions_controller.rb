@@ -44,7 +44,7 @@ class Users::SessionsController < Devise::SessionsController
     if session[:user_return_to] != nil
       redirect_to session[:user_return_to]
     else
-      redirect_to mypages_index_path, notice: 'お帰りなさい'
+      redirect_to mypages_index_path, notice: flash[:notice] = I18n.t('devise.sessions.welcome_back')
     end
 
     # super

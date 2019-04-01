@@ -29,7 +29,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       $customer_id = @result["result"]["id"]
       $name = @result["result"]["name"]
 
-      flash[:notice] = "お帰りなさい"
+      flash[:notice] = flash[:notice] = I18n.t('devise.sessions.welcome_back')
 
       #エラー処理していない
       @user = User.sign_in_with_facebook($email,$customer_id,$name)

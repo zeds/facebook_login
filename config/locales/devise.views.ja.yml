@@ -133,6 +133,7 @@ ja:
       updated: "アカウント情報を変更しました。"
     sessions:
       already_signed_out: "既にログアウト済みです。"
+      welcome_back: "Slornチケット販売サイトにログインしました"
       new:
         sign_in: "ログイン"
         email: "メールアドレス"
