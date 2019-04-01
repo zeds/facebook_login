@@ -37,7 +37,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
       # 詳細から来た時は、post_idのページを開く
       if session[:post_id] != ""
-        redirect_to posts_show_path(id: session[:post_id])
+        redirect_to posts_show_path(post_id: session[:post_id])
       else
         redirect_to mypages_index_path
       end

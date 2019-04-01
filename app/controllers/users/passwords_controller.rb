@@ -118,7 +118,7 @@ class Users::PasswordsController < Devise::PasswordsController
 
       # 詳細から来た時は、post_idのページを開く
       if session[:post_id] != ""
-        redirect_to posts_show_path(id: session[:post_id])
+        redirect_to posts_show_path(post_id: session[:post_id])
       else
         respond_with resource, location: after_resetting_password_path_for(resource)
       end

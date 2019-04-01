@@ -47,6 +47,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
               @user.encrypted_password = digest
               @user.save
               flash[:notice] = "パスワードを更新しました"
+              redirect_to mypages_index_path and return
             end
           end
         end

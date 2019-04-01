@@ -39,7 +39,7 @@ class NamesController < ApplicationController
       flash[:notice] = "Slornへようこそ"
 
       if session[:post_id] != ""
-        redirect_to posts_show_path(id: session[:post_id])
+        redirect_to posts_show_path(post_id: session[:post_id])
       else
         redirect_to mypages_index_path
       end

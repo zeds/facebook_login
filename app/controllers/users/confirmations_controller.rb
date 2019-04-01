@@ -14,8 +14,6 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
 
     email = resource_params["email"]
 
-    binding.pry
-
     #追加
     my_resource_params = {}
     my_resource_params["email"] = email
