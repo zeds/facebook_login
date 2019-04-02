@@ -133,6 +133,7 @@ class PostsController < ApplicationController
     if user_signed_in?
       # ログインしている時は、購入ボタンを消し、postのボタンを表示する
       @show_buy_button = false
+      flash[:notice] = "「購入」の際はChrome、IE、Safari等の専用ブラウザをご利用ください。"
     else
       @show_buy_button = true
     end
