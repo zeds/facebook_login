@@ -35,10 +35,6 @@ class PostsController < ApplicationController
     @detail = SlornApis.new.get_product_detail(session[:post_id])
 
 
-    Rails.logger.info("**************")
-    Rails.logger.info("ticket_caption" + @detail['ticket_caption'])
-
-    @html = @detail['ticket_caption']
 
     @phone_number = ''
 
@@ -53,8 +49,14 @@ class PostsController < ApplicationController
 
    @detail = SlornApis.new.get_product_detail(session[:post_id])
 
-   @html = @detail['metadata']['ticket_caption']
-   @html_strip = Sanitize.clean(@html, tags:[])
+   Rails.logger.info("**************")
+   Rails.logger.info("ticket_caption" + @detail['ticket_caption'])
+
+
+   @html = @detail['ticket_caption']
+   @html_kaigyou = @html.gsub(/\r\n|\r|\n/, "")
+   @html_strip = Sanitize.clean(@html_kaigyou, tags:[])
+
 
    set_meta_tags ({title: @detail['title'],
            description: @detail['ticket_caption'],
@@ -97,6 +99,26 @@ class PostsController < ApplicationController
     @customer_id = customer_id
     @em = email
 
+    # <input name="pn" type="HIDDEN" value="<%= @phone_number %>" />
+    # <input name="aid" type="HIDDEN" value=<%= session[:aid] %> />
+    # <input name="pt" type="HIDDEN" value=<%= session[:pt] %> />
+    # <input name="jb" type="HIDDEN" value=<%= session[:jb] %> />
+    # <input name="cod" type="HIDDEN" value=<%= @cod %> />
+    # <input name="cmd" type="HIDDEN" value=<%= session[:cmd] %> />
+    # <input name="iid" type="HIDDEN" value=<%= session[:pr_code] %> />
+    # <input name="customer_id" type="HIDDEN" value="<%= @customer_id %>" />
+    # <input name="em" type="HIDDEN" value=<%= @em %> />
+    # <input name="pr_code" type="HIDDEN" value=<%= session[:pr_code] %> />
+    Rails.logger.info("pn:"+@phone_number)
+    Rails.logger.info("aid:"+session[:aid].to_s)
+    Rails.logger.info("pt:"+session[:pt].to_s)
+    Rails.logger.info("jb:"+session[:jb].to_s)
+    Rails.logger.info("cod:"+@cod)
+    Rails.logger.info("cmd:"+session[:cmd].to_s)
+    Rails.logger.info("iid:"+session[:pr_code].to_s)
+    Rails.logger.info("customer_id:"+@customer_id)
+    Rails.logger.info("em:"+@em)
+    Rails.logger.info("pr_code:"+session[:pr_code].to_s)
 
     # @aid = "116389"
     # @pt = "1"
